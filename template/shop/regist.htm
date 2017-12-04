@@ -1,0 +1,176 @@
+<!--{template template/index/header}-->
+<style type="text/css">
+    body{background-color: #3ead01;}
+    dd{width:40%!important;text-align: left}
+    dt{width: 35%!important}
+</style>
+<style type="text/css">
+    .shop-span{padding:8px 15px;border-radius: 2px;border:1px solid #ddd;background-color: #0580bb;color:white;}
+</style>
+<div action="" method="post" style="width: 50%;margin:100px auto;text-align: center;border-radius:5px">
+<input type="hidden" name="delem" value="1">
+<div class="form_list mt10 trade" style="">
+<dl class="mt12">
+<div><b><font style="font-size:18px">用户注册</font></b></div>
+</dl>
+<dl class="mt12">
+    <dl class="mt12">
+        <dt>用户名:</dt>
+        <dd>
+            <input name="cname" class="text_s" autocomplete="off" value="{$arr_user['cname']}" style="width:80%;" type="text"><span class="tips red">*</span>
+        </dd>
+    </dl>
+    <dl class="mt12">
+        <dt>联系人:</dt>
+        <dd>
+            <input name="contacts" class="text_s" autocomplete="off" value="{$arr_user['contacts']}" style="width:80%;" type="text"><span class="tips red">*</span>
+        </dd>
+    </dl>
+    <dl class="mt12">
+        <dt>身份证:</dt>
+        <dd>
+            <input name="id_card" class="text_s" autocomplete="off" value="{$arr_user['id_card']}" style="width:80%;" maxlength="18" type="text"><span class="tips red">*</span>
+        </dd>
+    </dl>
+    <dl class="mt12">
+        <dt>联系方式:</dt>
+        <dd>
+            <input name="mobile" class="text_s" onKeyUp="value=value.replace(/[^\d{1,}]/g,'')" maxlength="11" minlength="11" autocomplete="off" value="{$arr_user['mobile']}" style="width:80%;" type="text"><span class="tips red">*</span>
+        </dd>
+    </dl>
+    <dl class="mt12">
+        <dt>登录名:</dt>
+        <dd>
+            <input name="username" class="text_s" autocomplete="off" value="{$arr_user['username']}" style="width:80%;" type="text"><span class="tips red">*</span>
+        </dd>
+    </dl>
+    <dl class="mt12">
+        <dt>密码:</dt>
+        <dd>
+            <input name="password" class="text_s" autocomplete="off" value="{$arr_user['password']}" style="width:80%;" type="password"><span class="tips red">*</span>
+        </dd>
+    </dl>
+    <dl class="mt12">
+        <dt>重复密码:</dt>
+        <dd>
+            <input name="password2" class="text_s" autocomplete="off" value="{$arr_user['password2']}" style="width:80%;" type="password"><span class="tips red">*</span>
+        </dd>
+    </dl>
+    <dl class="mt20">
+        <dt>&nbsp;</dt>
+        <dd class="sure_nav" style="width:35%!important">
+        <input class="blue_nav" value="提交" style="border-radius:3px;height:40px; line-height:40px; width:40%; border:0; font-weight:700; font-size:16px;" id="abc" type="submit">
+        <a href="javascript:history.back(-1)" style="border-radius:3px;height:40px; line-height:40px; width:40%; border:0; font-weight:700; font-size:16px;float:right;" class="gray_nav">返回</a>
+        </dd>
+    </dl>
+</div>
+</div>
+<script type="text/javascript" src="/mat/dist/js/lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/mat/dist/js/language/admin_zh_cn.js"></script>
+<script type="text/javascript" src="/mat/dist/js/modules/common.js"></script>
+<script type="text/javascript">
+    $("#abc").click(function(){
+        var cname = $('input[name="cname"]').val();
+        var contacts = $('input[name="contacts"]').val();
+        var id_card = $('input[name="id_card"]').val();
+        var mobile = $('input[name="mobile"]').val();
+        var username = $('input[name="username"]').val();
+        var password = $('input[name="password"]').val();
+        var password2 = $('input[name="password2"]').val();
+        if (cname =='') {
+            make_alert_html("警告",'用户名不能为空');
+            return false;
+        }
+        if (contacts=='') {
+            make_alert_html("警告",'联系人不能为空');
+            return false;
+        }
+        if (id_card=='') {
+            make_alert_html("警告",'身份证不能为空');
+            return false;
+        }
+        if (mobile=='') {
+            make_alert_html("警告",'联系电话不能为空');
+            return false;
+        }
+        if (username =='') {
+            make_alert_html("警告",'登录名不能为空');
+            return false;
+        }
+        if (password=='') {
+            make_alert_html("警告",'密码不能为空');
+            return false;
+        }
+        if (password2=='') {
+            make_alert_html("警告",'重复密码不能为空');
+            return false;
+        }
+
+        $.post(
+            '/index.php?mod=login&extra=regist',
+            {'cname':cname,'contacts':contacts,'mobile':mobile,'username':username,'password':password,'password2':password2,'delem':1},
+            function(data,status){
+                if (data) {
+                    window.location.href='/index.php';
+                }else{
+                    location.reload();
+                }
+            }
+            );
+        
+    });
+
+    $('input[name="cname"]').blur(function(){
+        var cname = $('input[name="cname"]').val();
+        if (cname) {
+            $.post(
+                '/index.php?mod=login&extra=regist',
+                {'cname':cname,'check_cname':1},
+                function(data,status){
+                    if (data == 1) {
+                     make_alert_html('提示','用户名已存在');
+                     $('input[name="cname"]').val('');
+                        
+                    }
+                }
+                );
+        }
+    });
+
+    $('input[name="username"]').blur(function(){
+        var username = $('input[name="username"]').val();
+        if (username) {
+            $.post(
+                '/index.php?mod=login&extra=regist',
+                {'username':username,'check_username':1},
+                function(data,status){
+                    if (data == 1) {
+
+                    make_alert_html('提示','登录名已存在');
+                    $('input[name="username"]').val('');
+                    }
+                }
+                );
+        }
+    });
+
+    $('input[name="password2"]').blur(function(){
+        var password2 = $('input[name="password2"]').val();
+        var password = $('input[name="password"]').val();
+        if (password!==password2) {
+            make_alert_html('提示','两次密码不一致');
+            $('input[name="password2"]').val('');
+        }
+    });
+
+    $('input[name="mobile"]').blur(function(){
+        var mobile = $('input[name="mobile"]').val();
+        if (mobile.length!=11) {
+            make_alert_html('提示','联系方式必须为11位手机号码');
+             $('input[name="mobile"]').val('');
+        }
+    });
+
+
+</script>
+<!--{template template/index/footer}-->

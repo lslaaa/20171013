@@ -1,0 +1,56 @@
+<!--{template template/admin/header}-->
+<form id="J_send_form" action="/admin.php?mod=file&mod_dir=file&extra=add" method="post" target="ajaxframeid" enctype="Multipart/form-data">
+    <input type="hidden" name="formhash" value="{$_SGLOBAL['formhash']}">
+    <input class="J_callback" type="hidden" name="callback" value="parent.send_success">  
+    <input type="hidden" name="id" value="{$arr_file['id']}" />
+    <input id="J_form_do" name="form_do" type="hidden" />
+    <!--
+	<input id="J_pic_max_width" type="hidden" value="760" />
+	<input type="hidden" id="J_editor_pic_size_tip" value="图片最佳为宽度760px,最大高度不要超过1000px" />
+    -->
+<div class="form_list mt10 trade">
+    <dl id="J_cat" class="mt12">
+        <dt>{$arr_language['cat']}:</dt>
+        <dd>
+        	<select id="J_cid" name="cid" data-cid="{$arr_file['cid_1']}" style="height:36px; line-height:36px;">
+            	<option value="0">{$arr_language['select']}</option>
+            {loop $arr_cat $v}
+            	{if $v['pid']==0}
+            	<option value="{$v['cid']}">{$v['name']}</option>
+                {/if}
+            {/loop}
+            </select>
+            <select id="J_cid_2" name="cid_2" data-cid="{$arr_file['cid_2']}" style="height:36px; line-height:36px; display:none;">
+            </select>
+            <span class="tips red">*</span>
+        </dd>
+    </dl>
+    <dl class="mt12">
+        <dt>{$arr_language['title']}:</dt>
+        <dd>
+        	<input id="J_title" type="text" name="title" class="text_s" autocomplete="off" value="{$arr_file['title']}" style="width:400px;"><span class="tips red">*</span>
+        </dd>
+    </dl>
+    <dl class="mt12" id="J_pic_box">
+        <dt>{$arr_language['file_2']}:</dt>
+        <dd style="position:relative;" id="J_img_add_dd">
+            <input type="hidden" name="file_url" value="{$arr_file['file']}" id="J_file_url" style="float:left;"/>
+            <input name="file" id="J_file" type="file" style="filter:alpha(opacity=0);-moz-opacity:0;opacity:0;width:100px;height:36px;position:absolute;left:0;top:0;cursor: pointer;float:left;">
+            <a class="upload_pic f_l" href="javascript:;">{$arr_language['upload']}</a>
+            <div id="J_file_show" class="up_pic_box">
+                {if $arr_file['file']}<a href="{$arr_file['file']}" target="_blank">{$arr_language['show_file']}</a>{/if}
+            </div>
+        </dd>
+    </dl>
+    <dl class="mt20">
+        <dt>&nbsp;</dt>
+        <dd class="sure_nav"><input type="submit" class="blue_nav" value="{$arr_language['send']}" style="border-radius:3px;height:52px; line-height:52px; width:158px; border:0; font-weight:700; font-size:16px;"></dd>
+    </dl>
+</div>
+</form>
+<script type="text/javascript" src="/mat/??dist/js/lib/jquery/jquery.min.js,dist/js/language/admin_zh_cn.js,dist/js/modules/common.js,dist/js/admin/admin_file.js?code_version={$_SGLOBAL['code_version']}"></script>
+<script type="text/javascript">
+admin_file.json_cat = {$json_cat};
+admin_file._init();
+</script>
+<!--{template template/admin/footer}-->

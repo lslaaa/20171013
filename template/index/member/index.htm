@@ -1,0 +1,72 @@
+<!--{template template/index/header}-->
+
+<body>
+<!-- 头部 -->
+<div class="header">
+	<div class="hed_lf"><i class="icon iconfont icon-xiaoxi" onclick="javascript:location.href='/i/alerts'"></i></div>
+	<div class="hed_rg"><i class="icon iconfont icon-shezhi" onclick="javascript:location.href='/account/perfecting_data'"></i></div>
+</div>
+<!-- 头部end -->
+
+<!-- container -->
+<div class="center">
+	<div class="member">
+		<div class="mber_top">
+			<div class="mber_top_tux">
+				<p class="img"><img src="{$arr_member['face']}" alt=""></p>
+				<p class="name"><i class="icon iconfont icon-gerenxinxi"></i>{if $arr_member['realname']}{$arr_member['realname']}{elseif $arr_member['nickname']}{$arr_member['nickname']}{else}{$arr_member['phone']}{/if}</p>
+				<p class="jianj">{if $arr_member_detail['content']}{$arr_member_detail['content']}{else}这个人很懒，什么都没有？{/if}</p>
+			</div>
+			<div class="member_bg"></div>
+			<ul>
+				<li>
+					<a href="/i/gold_detail">
+						<p class="h2">{if $float_money}{$float_money}{else}0.00{/if}</p>
+						<p class="h3">今日收入</p>
+					</a>
+				</li>
+				<li>
+					<a href="/i/gold_detail">
+						<p class="h2"><!--{eval echo $arr_member['balance']+$arr_member['commission']}--></p>
+						<p class="h3">账户总额</p>
+					</a>
+				</li>
+				<div class="clearfix"></div>
+			</ul>
+		</div>
+		<div class="mber_list">
+			<ul>
+				<li><a href="/i/my_task"><i class="icon iconfont icon-tupian"></i>我的任务<span><i class="icon iconfont icon-yousanjiao-copy-copy"></i></span></a></li>
+				<li><a href="/account/perfecting_data"><i class="icon iconfont icon-gerenxinxi1"></i>个人信息<span><i class="icon iconfont icon-yousanjiao-copy-copy"></i></span></a></li>
+				<li><a href="/i/my_purse"><i class="icon iconfont icon-qianbao"></i>我的钱包<span><i class="icon iconfont icon-yousanjiao-copy-copy"></i></span></a></li>
+				<li><a href="/withdrawal"><i class="icon iconfont icon-qiandai"></i>金币提现<span><i class="icon iconfont icon-yousanjiao-copy-copy"></i></span></a></li>
+				<li><a href="/i/bd_bank"><i class="icon iconfont icon-zhifubaofukuan"></i>绑定银行卡<span><i class="icon iconfont icon-yousanjiao-copy-copy"></i></span></a></li>
+				<li><a href="/i/my_client"><i class="icon iconfont icon-kehu"></i>我的客户<span><i class="icon iconfont icon-yousanjiao-copy-copy"></i></span></a></li>
+				<li><a href="javascript:;" id="J_qrcode"><i class="icon iconfont icon-erweima"></i>个人二维码<span><i class="icon iconfont icon-yousanjiao-copy-copy"></i></span></a></li>
+				<li><a href="/i/security"><i class="icon iconfont icon-zhanghuanquan"></i>账户安全<span><i class="icon iconfont icon-yousanjiao-copy-copy"></i></span></a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- /container -->
+
+
+<!-- footer -->
+<!--{template template/index/footer_menu}-->
+<!-- footer end -->
+<script src="/mat/dist/js/lib/jquery/jquery.min.js" type="text/javascript"></script>
+<script src="/mat/dist/js/modules/common.js" type="text/javascript"></script>
+<script src="/mat/dist/js/language/zh_cn.js" type="text/javascript"></script>
+<script src="/mat/dist/js/index/idangerous.swiper.min.js"></script> 
+<script type="text/javascript">
+	var int_success = {$_SGLOBAL['success_order']};
+	$('#J_qrcode').click(function(){
+		if (int_success>={$_SGLOBAL['data_config']['data_success_order']}) {
+			location.href='/i/qrcode';
+		}else{
+			make_alert_html('提示','请先完成{$_SGLOBAL['data_config']['data_success_order']}个任务');
+		}
+	})
+</script>
+
+<!--{template template/index/footer}-->

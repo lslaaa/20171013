@@ -1,0 +1,77 @@
+@charset "utf-8";
+/* CSS Document */
+/*--全局样式--*/
+
+body{color:#535353; font-size:12px; font-family:"Microsoft YaHei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;background-color:#fff;word-break : break-all;}
+body,div,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td,label{margin:0px;padding:0px;font-weight: normal;}
+h1, h2, h3, h4, h5, h6 {font-size:100%;font-weight:normal;margin: 0;}
+section, article, aside, header, footer, nav, dialog, figure {display: block;}
+a{color:#535353;text-decoration:none;outline: medium none;}
+a:hover{color:#666; text-decoration:none;}
+img{border:0; vertical-align:middle;max-width:100%;}
+ul,ol,li{list-style:none;}
+input, button, select, textarea{outline: none; font-family:"Microsoft YaHei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;background:none;}
+.clearfix{clear:both;}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{margin: 0;}
+
+
+.f_l{float: left;}
+.f_r{float: right;}
+.container{width:1200px; margin:auto;}
+
+/* 头部 */
+.header{border-bottom: solid 1px #dedede;}
+.header .logo{margin: 22px 0;}
+.header .nav{margin-left: 80px;}
+.header .nav li{float: left;padding: 0 18px;font-size: 18px;color: #333;line-height: 96px;margin-right: 50px;}
+.header .nav li a{color: #333;display: block;}
+.header .nav .no{border-bottom: solid 4px #00aaee;}
+.header .nav .no a{color: #00aaee;}
+
+/* banner */
+.banner_diqu{position: relative;}
+#solid{width:100%;height:360px;clear:both;position:relative;}
+.carousel-inner{height: 360px;}
+#solid .solid0,#solid .solid1,#solid .solid2{position:absolute;left:0px;top:0px;width:100%;height:598px;display:none;}
+#solid ul{margin:0px;padding:0px;list-style:none;	}
+#solid ul li{position:absolute;left:0;top:0px;width:100%;height:360px;display:none;cursor:pointer;}
+#solid ul li img{width: 100%;height: 360px;}
+#solid #btt{width:100%;height:30px;position:absolute;left:0;bottom: 0;text-align: center;z-index: 10000;}
+#solid #btt span{display:inline-block;width:14px;height:14px;margin:0 2px;	text-align:center;background:#fff;z-index:10;cursor:pointer;border-radius:7px;-webkit-border-radius:7px;-moz-border-radius: 7px;}
+#solid #btt .J_add{width: 22px;}
+
+  
+.login_sy{position: absolute;top: 0;z-index: 100;left: 0;width: 100%;}
+.login_sy .login_hig{height: 244px;background:rgba(0, 0, 0, 0.3) none repeat scroll 0 0 !important;filter:Alpha(opacity=30); background:#000;margin: 32px 0;padding: 26px;}
+.login_sy .login_hig .h3{font-size: 18px;color: #fff;line-height: 50px;text-align: center;}
+.login_sy .login_hig li{height: 40px;margin-bottom: 10px;}
+.login_sy .login_hig li span{background: #aaabab;color: #fff;width: 40px;height: 40px;display: block;float: left;text-align: center;line-height: 40px;}
+.login_sy .login_hig li span .icon{font-size: 22px;}
+.login_sy .login_hig li .order_a{border:0;height: 40px;padding:0 10px;margin-right: 10px;width: 200px;background: #fff;}
+.login_sy .login_hig .h5{font-size: 12px;color: #fff;line-height: 20px;text-align: right;}
+.login_sy .login_hig .loing_and a{display: block;font-size: 20px;color: #fff;line-height: 40px;width: 236px;text-align: center;background: #00aaee;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius: 5px;margin:10px auto;}
+
+.bh_seo{margin: 74px 0;}
+.bh_seo li{width: 16.2%;float: left;border: solid 1px #dedede;border-radius:7px;-webkit-border-radius:7px;-moz-border-radius: 7px;margin: 0 2%;text-align: center;padding: 34px 0;}
+.bh_seo .no{margin-right: 0;}
+.bh_seo li a{display: block;}
+.bh_seo li .ico{width: 90px;height: 90px;border-radius:50%;-webkit-border-radius:50%;-moz-border-radius: 50%;text-align: center;margin: auto;border: solid 2px #00aaee;line-height: 90px;}
+.bh_seo li .ico .icon{font-size: 50px;color: #00aaee;}
+.bh_seo li .h5{font-size: 18px;color: #333;line-height: 80px;}
+
+
+
+.tenants .h3{font-size: 24px;color: #000;line-height: 58px;text-align: center;margin: 50px 0;}
+.tenants li{font-size: 12px;color: #333;line-height: 44px;margin-bottom: 20px;}
+.tenants li label{width: 30%;text-align: right;display: inline-block;}
+.tenants li .tenants_a{border: solid 1px #dedede;height: 44px;padding:0 15px;width: 42%;background: #f9f9f9;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius: 3px;}
+.tenants li .tenants_b{border: solid 1px #dedede;height: 44px;padding:0 15px;margin-right: 2%;width: 26.3%;background: #f9f9f9;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius: 3px;}
+.tenants li .hq{border: solid 1px #dedede;display: inline-block;height: 44px;padding:0 15px;margin-right: 10px;width: 11%;background: #f9f9f9;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius: 3px;font-size: 16px;color: #666;text-align: center;}
+.tenants .and{margin-left: 30%;}
+.tenants .and a{display: block;font-size: 16px;color: #fff;line-height: 44px;width: 158px;text-align: center;background: #00aaee;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius: 3px;margin:10px 0;}
+
+.footer{text-align: center;border-top: solid 1px #dedede;font-size: 16px;color: #999;line-height: 58px;margin-top: 50px;}
+.footer a{color: #999;}
+
+
+

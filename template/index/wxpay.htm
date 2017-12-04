@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/> 
+        <title>微信支付</title>
+        <script type="text/javascript">
+            //调用微信JS api 支付
+            function jsApiCall() {
+                WeixinJSBridge.invoke(
+                        'getBrandWCPayRequest',
+                        {$jsApiParameters},
+                        function (res) {
+                            //WeixinJSBridge.log(res.err_msg);
+                            //alert(typeof res.err_code+res.err_desc+res.err_msg);
+                            //alert(typeof res.err_msg);
+                            if(res.err_msg=='get_brand_wcpay_request:ok'){
+                                window.location.href="http://www.dongtaimao.com";//支付成功页面
+                            }else{
+                                window.location.href="http://www.dongtaimao.com";//取消支付，或者支付失败页面
+                            }
+                            
+                        }
+                );
+            }
+
+            function callpay() {
+                if (typeof WeixinJSBridge == "undefined") {
+                    if (document.addEventListener) {
+                        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                    } else if (document.attachEvent) {
+                        document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                    }
+                } else {
+                    jsApiCall();
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <br/>        
+        <div align="center">
+            <p><b>该笔订单支付金额为{$float_total_price}元</b></p>
+            <button style="width:210px; height:50px; border-radius: 15px;background-color:#54be1c; border:0px #54be1c solid; cursor: pointer;  color:white;  font-size:16px;" type="button" onClick="callpay();" >立即支付</button>
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,86 @@
+<!--{template template/index/header}-->
+
+<body>
+<!-- 头部 -->
+<div class="header">
+	<div class="hed_lf"><a href="/i"><i class="icon iconfont icon-sanjiao"></i></a></div>
+	<div class="hed_ct">我的钱包</div>
+</div>
+<!-- 头部end -->
+
+<!-- container -->
+<div class="center">
+	<div class="gold_detail">
+		<div class="mber_top">
+			<div class="mber_top_tux">
+				<p class="txt">账户总额</p>
+				<p class="money"><!--{eval echo $arr_member['balance']+$arr_member['commission']}--></p>
+			</div>
+			<p class="mingx">金币明细</p>
+			<ul>
+				<li class="h2">
+					<p>可用金币</p>
+					<p>{$arr_member['balance']}</p>
+				</li>
+				<li class="h3">
+					<p>活动奖励</p>
+					<p>0.00</p>
+				</li>
+				<li class="h4">
+					<p>冻结金币</p>
+					<p>{$arr_member['commission']}</p>
+				</li>
+				<li class="h5">
+					<p>触发金币</p>
+					<p>0.00</p>
+				</li>
+				<div class="clearfix"></div>
+			</ul>
+		</div>
+		<div class="my_purse">
+			<p class="my_h3">金币记录</p>
+			{loop $arr_money_date $v}
+			<dl>
+				<dt>{$v['date']}</dt>
+				{loop $v['money_log'] $v2}
+				<dd>
+					<div class="my_lf">
+						<p class="lu">{if $v2['type']==20}完成任务{elseif $v2['type']==50}提现{elseif $v2['type']==55}提现撤销{elseif $v2['type']==21}自动取消补贴{elseif $v2['type']==22}超时审核补贴{/if}</p>
+						<p class="sj"><!--{eval echo date('m-d H:i:s',$v2['in_date'])}--></p>
+					</div>
+					<span>{if $v2['type']!=50}+{else}-{/if}{$v2['money']}</span>
+					<div class="clearfix"></div>
+				</dd>
+				{/loop}
+			</dl>
+			{/loop}
+			<div class="and_login"><a href="javascript:;">查看更多</a></div>
+		</div>
+	</div>
+</div>
+<!-- /container -->
+
+
+<!-- footer -->
+<!-- footer end -->
+
+<script src="/mat/dist/js/lib/jquery/jquery.min.js" type="text/javascript"></script>
+<script>
+	$(function () {
+            	var flag = true; 
+            	$(".and_login").click(function () {
+                   	 var _this = $(this);
+                    	if(flag) {
+                            	$(".my_purse dl").addClass("item_da");
+                            	flag = false;
+                    	}else {
+				$(".my_purse dl").removeClass("item_da");
+                            flag = true;
+                    	}
+            	});
+	});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!--{template template/admin/header}-->
+<!-- 列表 [[-->
+<div class="help_menu mt10">
+	<div class="f_l">
+    {if $arr_languages}
+    	{$arr_language['language']}:
+        <select id="J_language" name="language" style="height:36px; line-height:36px;">
+            <option value="0">{$arr_language['select']}</option>
+        {loop $arr_languages $v}
+            <option value="{$v['cname']}"{if $str_language==$v['cname']} selected="selected"{/if}>{$v['name']}</option>
+        {/loop}
+        </select>
+    {/if}
+    	{$arr_language['cat']}:
+        <select id="J_cid" name="cid_1" data-cid="{$int_cid_1}" style="height:36px; line-height:36px;">
+            <option value="0">{$arr_language['select']}</option>
+        {loop $arr_cat $v}
+            {if $v['pid']==0}
+            <option value="{$v['cid']}">{$v['name']}</option>
+            {/if}
+        {/loop}
+        </select>
+        <select id="J_cid_2" name="cid_2" data-cid="{$int_cid_2}" style="height:36px; line-height:36px; display:none;"></select>
+        <select id="J_cid_3" name="cid_3" data-cid="{$int_cid_3}" style="height:36px; line-height:36px; display:none;"></select>
+    </div>
+</div>
+<div class="admin_menu mt12">
+        <span class="J_show_hide_menu">
+            <a id="J_add_level_one" href="/admin.php?mod=video&mod_dir=video&extra=add" class="blue_nav">{$arr_language['add']}</a>
+        </span>
+        <span class="J_submit_from"></span>
+</div>
+<div class="info_wrap main_table mt10">
+    <table>
+    	<tr>
+            <th class="" style="text-align:left; padding-left:10px;">{$arr_language['pic']}</th>
+            {if $arr_list['list'][0]['cid_1']>0}
+            <th class="table_w5">{$arr_language['cat']}</th>
+            {/if}
+            {if $arr_languages}
+            <th class="table_w6">{$arr_language['language']}</th>
+            {/if}
+            <th class="table_w5">{$arr_language['date']}</th>
+            <th class="table_w5">{$arr_language['admin_member']['do']}</th>
+        </tr>
+        {if $arr_list['total']>0}
+        {loop $arr_list['list'] $v}
+        <tr class="white">
+            <td style="text-align:left; padding-left:10px;"><img style="width:80px;height:80px;" src="{$v['pic']}"/></td>
+            {if $v['cid_1']>0}
+            <td>
+            	{$arr_cat_b[$v['cid_1']]['name']}
+                {if $v['cid_2']>0}&nbsp;&nbsp;{$arr_cat_b[$v['cid_2']]['name']}{/if}
+                {if $v['cid_3']>0}&nbsp;&nbsp;{$arr_cat_b[$v['cid_3']]['name']}{/if}</td>
+            {/if}
+            {if $arr_languages}
+            <td>{$arr_languages_b[$v['language']]['name']}</td>
+            {/if}
+            <td><!--{eval echo date("Y-m-d H:i:s",$v['in_date'])}--></td>
+            <td class="table_nav">
+            	{if $arr_languages}
+            	<a style="width:50px;" href="/admin.php?mod=video&mod_dir=video&extra=add&id={$v['id']}&copy=1" class="red_nav admin_nav">{$arr_language['copy']}</a>
+                {/if}
+            	<a{if $arr_languages} style="width:50px;" {/if} href="/admin.php?mod=video&mod_dir=video&extra=add&id={$v['id']}" class="blue_nav admin_nav">{$arr_language['mod']}</a>
+                <a{if $arr_languages} style="width:50px;" {/if} href="javascript:;" class="gray_nav admin_nav J_btn_del" onclick="return false;" data-id="{$v['id']}">{$arr_language['del']}</a>
+			</td>
+        </tr>
+        {/loop}
+        {else}
+        <tr class="white">
+            <td colspan="{if $arr_languages}4{else}3{/if}"><div class="no-data">{$arr_language['nothing']}</div></td>
+        </tr>
+        {/if}
+    </table>
+</div>
+<!--]] 列表 -->
+<!-- page [[-->
+
+<div class="info_wrap mt20">
+	<div class="page">{$str_num_of_page}</div>
+</div>
+<!--]] page -->
+<script type="text/javascript" src="/mat/??dist/js/lib/jquery/jquery.min.js,dist/js/language/admin_zh_cn.js,dist/js/modules/common.js,dist/js/admin/admin_video.js?code_version={$_SGLOBAL['code_version']}"></script>
+<script type="text/javascript">
+var str_formhash = '{$_SGLOBAL['formhash']}';
+admin_video.json_cat = {$json_cat};
+admin_video._listen_del();
+admin_video._listen_cat();
+admin_video_search._init();
+</script>
+<!--{template template/admin/footer}-->

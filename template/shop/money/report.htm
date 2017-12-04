@@ -1,0 +1,68 @@
+<!--{template template/admin/header}-->
+<style type="text/css">
+    td{border:1px black solid;border-bottom:1px black solid!important;border-right:1px black solid!important;}
+</style>
+<!-- 列表 [[-->
+<div class="admin_rights mt10">
+<!-- <a href="javascript:history.back(-1)" style="padding:10px 20px;border-radius:2px;border:1px solid #ddd;" class="gray_nav">返回</a><br><br> -->
+<div style="padding-top:15px">
+<p style="font-size:18px"><b>财务总报表</b></p>
+</div>
+<br>
+<!-- <form action="/admin.php?mod=money&mod_dir=money" method="get">
+    <input type="hidden" name="mod" value="money"/>
+    <input type="hidden" name="mod_dir" value="money"/>
+    <span>用户名：</span><input type="text" class="text_s" style="height:25px" name="username" value="{$str_username}">
+    <span>手机号：</span><input type="text" class="text_s" style="height:25px" name="mobile" value="{$str_mobile}">
+    <span>店铺id：</span><input type="text" class="text_s" style="height:25px" name="shopid" value="{$str_shopid}">
+    <span>QQ：</span><input type="text" class="text_s" style="height:25px" name="qq" value="{$str_qq}">
+    <input type="submit" class="blue_nav btn_class"  name="" value="搜索">
+</form> -->
+<br>
+<input type="hidden" name="uid" value="{$_GET['uid']}" id="uid"/>
+<div class="info_wrap main_table mt10">
+    <table>
+        <tr>
+            <td colspan="6"><b style="font-size: 18px">财务总报表</b></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="background-color: #ffa200;color: white"><b>全部商家</b></td>
+            <td colspan="2" style="background-color: #76bded;color: white"><b>全部团队</b></td>
+            <td colspan="2" style="background-color: #eb0000;color: white"><b>全部业务员</b></td>
+        </tr>
+        <tr>
+            <td style="width: 16%;background-color: #ffa200;color: white">充值总额</td>
+            <td style="width: 16%;background-color: #ffa200;color: white">{$arr_recharge_shop[0]['total']}</td>
+            <td style="width: 16%;background-color: #76bded;color: white">未提现余额</td>
+            <td style="width: 16%;background-color: #76bded;color: white">{$arr_balance_after[0]['total']}</td>
+            <td style="width: 16%;background-color: #eb0000;color: white">未提现余额</td>
+            <td style="width: 16%;background-color: #eb0000;color: white">{$arr_balance_worker[0]['total']}</td>
+        </tr>
+        <tr>
+            <td style="width: 16%;background-color: #ffa200;color: white">账户余额</td>
+            <td style="width: 16%;background-color: #ffa200;color: white">{$arr_balance_shop[0]['total']}</td>
+            <td style="width: 16%;background-color: #76bded;color: white">已提现金额</td>
+            <td style="width: 16%;background-color: #76bded;color: white">{$arr_consult_after[0]['total']}</td>
+            <td style="width: 16%;background-color: #eb0000;color: white">已提现金额</td>
+            <td style="width: 16%;background-color: #eb0000;color: white">{$arr_consult_worker[0]['total']}</td>
+        </tr>
+        <tr>
+            <td style="width: 16%;background-color: #ffa200;color: white">提现总额</td>
+            <td style="width: 16%;background-color: #ffa200;color: white">{$arr_consult_shop[0]['total']}</td>
+            <td style="width: 16%;background-color: #76bded;color: white"></td>
+            <td style="width: 16%;background-color: #76bded;color: white"></td>
+            <td style="width: 16%;background-color: #eb0000;color: white"></td>
+            <td style="width: 16%;background-color: #eb0000;color: white"></td>
+        </tr>
+    </table>
+</div>
+        
+<script type="text/javascript" src="/mat/dist/js/lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/mat/dist/js/language/admin_zh_cn.js"></script>
+<script type="text/javascript" src="/mat/dist/js/modules/common.js"></script>
+<script type="text/javascript" src="/mat/dist/js/admin/admin_confirm_recharge.js?code_version={$_SGLOBAL['code_version']}"></script>
+<script type="text/javascript">
+var str_formhash = '{$_SGLOBAL['formhash']}';
+admin_confirm_recharge._init();
+</script>
+<!--{template template/admin/footer}-->

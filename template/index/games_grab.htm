@@ -1,0 +1,175 @@
+<!--{template template/index/header}-->
+
+<body>
+<!-- 头部 -->
+<div class="header">
+	<div class="hed_lf"><a href="/game"><i class="icon iconfont icon-sanjiao"></i></a></div>
+	<div class="hed_ct">任务领取</div>
+</div>
+<!-- 头部end -->
+
+
+<!-- container -->
+<div class="container">
+	<div class="games_list">
+		<form id="J_send_form" action="/game/get_task" method="post" target="ajaxframeid">
+	        <input class="J_callback" type="hidden" name="callback" value="parent.send_success">
+	        <input type="hidden" name="formhash" value="{$_SGLOBAL['formhash']}">
+	        <input type="hidden" name="item_id" value="{$_GET['item_id']}">
+		<div class="grad">
+			<div class="rows_list">
+				<ul>
+					<li>
+						<h6>{$arr_data['data_kouling_1']}</h6>
+						<textarea id="J_des_1" style="display:none;">{$arr_data['data_kouling_1']}</textarea>
+						<p class="h4">复制淘口令在手机淘宝打来<a href="javascript:;" id="J_des_1_btn" class="J_copy_btn">复制</a></p>
+						<div class="up_img">
+							<dl>
+								<dd>
+									<a href="javascript:void(0);" class="input"><i class="icon iconfont icon-jia1"></i>
+										<input type="file" id="file" class="J_file">
+										<input type="hidden" name="pic_url[1]" value="{$arr_member_taobao['pics'][0]}" class="J_file_url">
+									</a>
+									<div class="my-3" id="preview"></div>
+								</dd>
+								<div class="clearfix"></div>
+							</dl>
+						</div>
+					</li>
+					<li>
+						<h6>{$arr_data['data_kouling_2']}</h6>
+						<textarea id="J_des_2" style="display:none;">{$arr_data['data_kouling_2']}</textarea>
+						<p class="h4">复制淘口令在手机淘宝打来，上中下三张截图<a  href="javascript:;" id="J_des_2_btn" class="J_copy_btn">复制</a></p>
+						<div class="up_img">
+							<dl>
+								<dd>
+									<a href="javascript:void(0);" class="input"><i class="icon iconfont icon-jia1"></i>
+										<input type="file" id="file" class="J_file">
+										<input type="hidden" name="pic_url[2]" value="{$arr_member_taobao['pics'][0]}" class="J_file_url">
+									</a>
+									<div class="my-3" id="preview"></div>
+								</dd>
+								<dd>
+									<a href="javascript:void(0);" class="input"><i class="icon iconfont icon-jia1"></i>
+										<input type="file" id="file" class="J_file">
+										<input type="hidden" name="pic_url[3]" value="{$arr_member_taobao['pics'][0]}" class="J_file_url">
+									</a>
+									<div class="my-3" id="preview"></div>
+								</dd>
+								<dd>
+									<a href="javascript:void(0);" class="input"><i class="icon iconfont icon-jia1"></i>
+										<input type="file" id="file" class="J_file">
+										<input type="hidden" name="pic_url[4]" value="{$arr_member_taobao['pics'][0]}" class="J_file_url">
+									</a>
+									<div class="my-3" id="preview"></div>
+								</dd>
+								<div class="clearfix"></div>
+							</dl>
+						</div>
+					</li>
+					<li>
+						<h6>{$arr_data['data_kouling_3']}</h6>
+						<textarea id="J_des_3" style="display:none;">{$arr_data['data_kouling_3']}</textarea>
+						<p class="h4">复制淘口令在手机淘宝打来，上中下三张截图<a href="javascript:;" id="J_des_3_btn" class="J_copy_btn">复制</a></p>
+						<div class="up_img">
+							<dl>
+								<dd>
+									<a href="javascript:void(0);" class="input"><i class="icon iconfont icon-jia1"></i>
+										<input type="file" id="file" class="J_file">
+										<input type="hidden" name="pic_url[5]" value="{$arr_member_taobao['pics'][0]}" class="J_file_url">
+									</a>
+									<div class="my-3" id="preview"></div>
+								</dd>
+								<dd>
+									<a href="javascript:void(0);" class="input"><i class="icon iconfont icon-jia1"></i>
+										<input type="file" id="file" class="J_file">
+										<input type="hidden" name="pic_url[6]" value="{$arr_member_taobao['pics'][0]}" class="J_file_url">
+									</a>
+									<div class="my-3" id="preview"></div>
+								</dd>
+								<dd>
+									<a href="javascript:void(0);" class="input"><i class="icon iconfont icon-jia1"></i>
+										<input type="file" id="file" class="J_file">
+										<input type="hidden" name="pic_url[7]" value="{$arr_member_taobao['pics'][0]}" class="J_file_url">
+									</a>
+									<div class="my-3" id="preview"></div>
+								</dd>
+								<div class="clearfix"></div>
+							</dl>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="tijiao" id="J_send"><a href="javascript:;">提交</a></div>
+		</div>
+		</form>
+	</div>
+</div>
+<!-- /container -->
+
+
+<!-- footer -->
+<!--{template template/index/footer_menu}-->
+<!-- footer end -->
+
+
+
+
+<script src="/mat/dist/js/lib/jquery/jquery.min.js" type="text/javascript"></script>
+<script src="/mat/dist/js/modules/common.js" type="text/javascript"></script>
+<script src="/mat/dist/js/language/zh_cn.js" type="text/javascript"></script>
+<script src="/mat/dist/js/index/idangerous.swiper.min.js"></script> 
+<script src="/mat/dist/js/lib/clipboard/clipboard.min.js"></script> 
+<script src="/mat/dist/js/index/game.js"></script> 
+<script type="text/javascript" src="/mat/dist/js/upload/lrz.bundle.js?code_version={$_SGLOBAL['code_version']}"></script>
+
+<script>
+game._init();
+var tabsSwiper = new Swiper('.swiper-container',{
+	speed:500,
+	onSlideChangeStart: function(){
+		$(".tabs .active").removeClass('active');
+		$(".tabs a").eq(tabsSwiper.activeIndex).addClass('active');
+	}
+});
+
+$(".tabs a").on('touchstart mousedown',function(e){
+	e.preventDefault()
+	$(".tabs .active").removeClass('active');
+	$(this).addClass('active');
+	tabsSwiper.swipeTo($(this).index());
+});
+
+$(".tabs a").click(function(e){
+	e.preventDefault();
+});
+
+
+</script>
+<script>
+var arr_init_copy = new Array();
+$('.J_copy_btn').click(function(){
+	var _this = $(this);
+	var str_btn_id = _this.attr('id');
+	var str_des_id = str_btn_id.replace('_btn','');
+	if(typeof(arr_init_copy[str_btn_id])!='undefined'){
+		return false;	
+	}
+	arr_init_copy[str_btn_id] = 1;
+	var clipboard = new Clipboard('#'+str_btn_id, {
+		text: function() {
+			var str_des = $('#'+str_des_id).html();
+			return str_des;
+		}
+	});
+	clipboard.on('success', function(e) {
+		$('#'+str_btn_id).html('文字复制成功');
+	});
+	
+	clipboard.on('error', function(e) {
+		alert('复制失败，请长按文字，选择复制');
+	});				
+});
+
+</script>
+<!--{template template/index/footer}-->

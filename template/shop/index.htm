@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>动态猫 - 刷动态评分,代刷淘宝天猫动态评分,动态评分提升</title>
+<link rel="stylesheet" href="/mat/dist/css/index/css.css" type="text/css" />
+<script type="text/javascript" src="/mat/dist/js/lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/mat/dist/js/language/admin_zh_cn.js"></script>
+<script type="text/javascript" src="/mat/dist/js/modules/common.js"></script>
+<meta name="keywords" content="动态猫,代刷动态评分,淘宝动态评分,刷动态评分,动态评分查询,店铺动态评分,刷动态评分,淘宝动态评分查询,动态评分计算,刷动态评分安全吗,刷动态评分处罚,天猫动态评分,刷动态评分软件,如何刷动态评分,动态评分提升" />
+<meta name="description" content="动态猫-是杭州云网电子商务旗下的官方网站，淘宝领先的动态评分提升维护公司，成交客户超过1万，其中服务淘宝动态评分查询，淘宝动态评分计算，淘宝动态评分提升等为主的卖家服务。为淘宝卖家解决了网店动态评分低报不了活动的烦恼，将安全、低价、诚信交易为商业价值和回头客价值。欢迎您来合作共赢！" />
+</head>
+<style type="text/css">
+    .float_menu {
+    position: fixed;
+    z-index: 999;
+    right: 0;
+    top: 40%;
+}
+.float_menu a {
+    display: block;
+    margin-top: 5px;
+    width: 50px;
+    height: 50px;
+    background-color: #FF4200;
+    position: relative;
+}
+.float_menu a i.ico_a {
+    background-position: left top;
+}
+.float_menu a i.ico_b {
+    background-position: -26px top;
+}
+.float_menu a i.ico_c {
+    background-position: -52px top;
+}
+.float_menu a i.ico_d {
+    background-position: -78px top;
+}
+.float_menu a i.ico_e {
+    background-position: -104px top;
+}
+.float_menu a:hover i.ico_a {
+    background-position: left -26px;
+}
+.float_menu a:hover i.ico_b {
+    background-position: -26px -26px;
+}
+.float_menu a:hover i.ico_c {
+    background-position: -52px -26px;
+}
+.float_menu a:hover i.ico_d {
+    background-position: -78px -26px;
+}
+.float_menu a:hover i.ico_e {
+    background-position: -104px -26px;
+}
+.float_menu a span img {
+    display: block;
+    max-width: 140px;
+}
+.float_menu a span p {
+    font-size: 14px;
+    color: #a6a6a6;
+    display: block;
+    margin-top: 10px;
+}
+.float_menu a i {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    overflow: hidden;
+    margin: 11px;
+}
+.float_menu .ico {
+    background-image: url(/mat/dist/images/index/ico_2.png);
+    background-repeat: no-repeat;
+}
+em, i {
+    font-style: normal;
+}
+.float_menu a em {
+    display: block;
+    position: absolute;
+    right: 50px;
+    top: 0;
+    background-color: #222;
+    line-height: 50px;
+    font-size: 16px;
+    color: #f5c15b;
+    padding: 0 20px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+em, i {
+    font-style: normal;
+}
+
+.float_menu a span {
+    display: block;
+    padding: 10px;
+    background-color: #222;
+    position: absolute;
+    right: 50px;
+    top: 0;
+    overflow: hidden;
+    text-align: center;
+}
+</style>
+
+<body>
+<!-- head [[-->
+<div class="float_menu">
+    {if $arr_config}
+    {loop $arr_config['val'] $val}
+    {if $val['type']=='mobile'}
+    <a class="J_right_menu_btn">
+        <i class="ico_a ico">&nbsp;</i>
+        <em class="J_right_menu" style="display:none">{$val['mobile']}</em>
+    </a>
+    {/if}
+    {/loop}
+    {/if}
+    <a href="javascript:;" class="J_right_menu_btn">
+       <i class="ico_c ico">&nbsp;</i>
+       <span class="J_right_menu" style="display:none">
+           <img src="/mat/dist/images/index/tbfu_code.jpg" alt="动态猫官方微信号">
+           <p>关注微信公众号</p>
+       </span>
+   </a>
+    {if $arr_config}
+    {loop $arr_config['val'] $val}
+    {if $val['type']=='qq'}
+    <a href="http://wpa.qq.com/msgrd?v=3&amp;uin={$val['qq']}&amp;Menu=yes" target="_blank" class="J_right_menu_btn">
+        <i class="ico_b ico">&nbsp;</i>
+        <em class="J_right_menu" style="display:none">{$val['name']}</em>
+    </a>
+    {/if}
+    {/loop}
+    {/if}
+
+<!--     <a href="/dealer" class="J_right_menu_btn">
+    <i class="ico_d ico">&nbsp;</i>
+    <em class="J_right_menu" style="display:none">经销商查询</em>
+</a>
+<a href="/secruity" class="J_right_menu_btn">
+    <i class="ico_e ico">&nbsp;</i>
+    <em class="J_right_menu" style="display:none">防伪查询</em>
+</a> -->
+</div>
+<div class="head">
+	<div class="wp">
+    	<div class="logo">
+        	<a href="/"><img src="/mat/dist/images/index/logo.png"></a>
+        </div>
+        <div class="menu">
+        	<a href="/index.php?mod=main">
+            	<i class="ico ico_a">&nbsp;</i>
+                <em>商家中心</em>
+            </a>
+        	<!-- <a href="/index.php?mod=login&extra=regist">
+            	<i class="ico ico_b">&nbsp;</i>
+                <em>商家注册</em>
+            </a> -->
+        	<a href="/shouhou.php?mod=main">
+            	<i class="ico ico_c">&nbsp;</i>
+                <em>团队中心</em>
+            </a>
+        </div>
+        <div class="clear"></div>
+        <div class="video" style="text-align:left">
+            <video src="/lib/taobao.mp4" controls="controls" loop="loop" style="width:100%">
+            您的浏览器不支持 video 标签。
+            </video>
+        </div>
+    </div>
+</div>
+<!--]] head -->
+<!-- content [[-->
+<div class="wp">
+	<div class="title">
+    	<span class="po_a"><!-- title --></span>
+    </div>
+    <div class="content">
+    	<div class="info">
+        	<img src="/mat/dist/images/index/ad_pic_s.jpg" alt="动态猫评分管理1">
+            <span>动态猫-是杭州云网电子商务旗下的官方网站，是一家从事为淘宝天猫店铺提供提升维护动态评分的公司，公司目前以为全国数千家电商网店提升了动态评分，效果显著，另外公司还为商家打造了很多免费的软件，如自动返现功能，其它团队根本就没有这个软件，就算有也不会免费提供给商家用，而我们网站是全部免费开放给商家使用，全自动好评返现可做到指定金额，返现一定比例的红包，比如购买50元以下产品的买家，返现1元，购买100元的返现2元等设置，大大节省了商家的返现成本，在这儿您可以随心所欲要求买家好评和晒图，在这儿买家只需要做两件事情，提交订单号和上传截图，对您没有听错，一切都是这么的简单，而卖家只要轻轻一点批量审核。</span>
+        </div>
+    </div>
+	<div class="title">
+    	<span class="po_b"><!-- title --></span>
+    </div>
+    <div class="content">
+    	<div class="list">
+        	<span>
+            	<p>
+                	<i class="co_a">a.</i>
+                    <em>当买家领完返现后，<br>这部分买家将会一直留在您的微信公众号上</em>
+                </p>
+            	<p>
+                	<i class="co_b">b.</i>
+                    <em>日后店铺上新、打折促销等，都可以进行二次营销让这批买家再次购买！</em>
+                </p>
+            	<p>
+                	<i class="co_c">c.</i>
+                    <em>当买家领完返现后，<br>这部分买家将会一直留在您的微信公众号上</em>
+                </p>
+            </span>
+            <img src="/mat/dist/images/index/ad_pic_t.jpg">
+        </div>
+    </div>
+	<div class="title">
+    	<span class="po_c"><!-- title --></span>
+    </div>
+    <div class="content">
+    	<ul>
+        	<li>
+            	<img src="/mat/dist/images/index/cs_pic.jpg" alt="动态猫评分管理2">
+                <span>专业的心理学教授分析买家的心理，指导催评员话术的专业性，亲和力加上专业性，成功率可高达30-50%</span>
+            </li>
+        	<li>
+            	<img src="/mat/dist/images/index/cs_pic.jpg" alt="动态猫评分管理3">
+                <span>专业的心理学教授分析买家的心理，指导催评员话术的专业性，亲和力加上专业性，成功率可高达30-50%</span>
+            </li>
+        	<li>
+            	<img src="/mat/dist/images/index/cs_pic.jpg" alt="动态猫评分管理4">
+                <span>专业的心理学教授分析买家的心理，指导催评员话术的专业性，亲和力加上专业性，成功率可高达30-50%</span>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--]] content -->
+<!-- copyright [[-->
+<div class="wp">
+    <div class="copyright">
+        &copy; 2016 Copyright 版权所有&nbsp;&nbsp;&nbsp;
+        <a href="http://www.miitbeian.gov.cn/" target="_blank">浙ICP备16046856号-2</a>&nbsp;&nbsp;&nbsp;
+        杭州云网电子商务有限公司
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261279464'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261279464%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+    </div>
+</div>
+<!--]] copyright -->
+</body>
+<script type="text/javascript">
+    $(function(){  
+
+            $('.J_right_menu_btn').hover(function(){  
+                // alert('111111111');
+                $(this).find('em').show();  
+                $(this).find('span').show();  
+            },function(){  
+                $(this).find('em').hide();  
+                $(this).find('span').hide();  
+            })
+        })
+</script>
+</html>

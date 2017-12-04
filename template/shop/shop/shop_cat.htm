@@ -1,0 +1,70 @@
+<!--{template template/shop/header}-->
+<!-- 后台菜单设置 [[-->
+<div class="admin_rights mt10">
+    <!-- admin_menu [[-->
+    <div class="admin_menu mt12">
+        	<span class="J_show_hide_menu">
+            	<a id="J_add_level_one" href="javascript:;" class="blue_nav">{$arr_language['add']}</a>
+            </span>
+            <span class="J_submit_from"></span>
+    </div>
+    <!--]] admin_menu -->
+    <!--{if count($arr_cat)>0}-->
+    <!--{loop $arr_cat $v}-->
+    <dl class="mt12">
+        <dt class="J_show_hide_mouseover" data-cid="{$v['cid']}" data-level="{$v['level']}">
+            <em><b>{$arr_language['sort']}:{$v['sort']}</b>{$v['name']}</em>
+        	<span class="J_show_hide_menu">
+            	<a href="javascript:;" class="nav_run blue_nav J_show_hide_menu_add">{$arr_language['add']}</a>
+                <a href="javascript:;" class="nav_run red_nav J_show_hide_menu_mod" data-cid="{$v['cid']}">{$arr_language['mod']}</a>
+                <a href="javascript:;" class="nav_run gray_nav J_show_hide_menu_del" data-cid="{$v['cid']}">{$arr_language['del']}</a>
+            </span>
+            <span class="J_submit_from"></span>
+        </dt>
+        
+        <!--二级菜单 start-->
+        <!--{if count($v['subs'])>0}-->
+        <!--{loop $v['subs'] $v2}-->
+        <h1 class="J_show_hide_mouseover" data-cid="{$v2['cid']}" data-level="{$v2['level']}">
+            <em><b>{$arr_language['sort']}:{$v2['sort']}</b>{$v2['name']}</em>
+            <span class="J_show_hide_menu">
+            {if in_array($v2['cid'],$arr_allow_add) || in_array($v2['pid'],$arr_allow_pid_add)}
+            	<a href="javascript:;" class="nav_run blue_nav J_show_hide_menu_add">{$arr_language['add']}</a>
+            {/if}
+                <a href="javascript:;" class="nav_run red_nav J_show_hide_menu_mod" data-cid="{$v2['cid']}">{$arr_language['mod']}</a>
+                <a href="javascript:;" class="nav_run gray_nav J_show_hide_menu_del" data-cid="{$v2['cid']}">{$arr_language['del']}</a>
+            </span>
+           
+            <span class="J_submit_from"></span>
+        </h1>
+
+        <!-- 3级菜单 start-->
+        <!--{if count($v2['subs'])>0}-->
+        <!--{loop $v2['subs'] $v3}-->
+        <h2 class="J_show_hide_mouseover" data-cid="{$v3['cid']}" data-level="{$v3['level']}">
+            <em><b>{$arr_language['sort']}:{$v3['sort']}</b>{$v3[name]}</em>
+            <span class="J_show_hide_menu">
+                <a href="javascript:;" class="nav_run blue_nav J_show_hide_menu_add" style="display:none;">{$arr_language['add']}</a>
+                <a href="javascript:;" class="nav_run red_nav J_show_hide_menu_mod">{$arr_language['mod']}</a>
+                <a href="javascript:;" class="nav_run gray_nav J_show_hide_menu_del" style="display:none;">{$arr_language['del']}</a>
+            </span>
+            <span class="J_submit_from"></span>
+        </h2>
+        
+        <!--{/loop}-->
+        <!--{/if}-->
+        <!-- 3级菜单 end-->
+
+        <!--{/loop}-->
+        <!--{/if}-->
+        <!--二级菜单 end-->
+    </dl>
+    <!--{/loop}-->
+    <!--{/if}-->    
+</div>
+<script type="text/javascript" src="/mat/??dist/js/lib/jquery/jquery.min.js,dist/js/language/admin_zh_cn.js,dist/js/modules/common.js,dist/js/shop/admin_shop_cat.js?code_version={$_SGLOBAL['code_version']}"></script>
+<script type="text/javascript">
+var str_formhash = '{$_SGLOBAL['formhash']}';
+admin_shop_cat._init();
+</script>
+<!--{template template/index/footer}-->

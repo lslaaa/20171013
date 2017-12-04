@@ -1,0 +1,45 @@
+<!--{template template/admin/header}-->
+<!-- 列表 [[-->
+<div class="admin_menu mt12">
+        <span class="J_show_hide_menu">
+            <a id="J_add_level_one" href="/admin.php?mod=member_group&mod_dir=setting&extra=add" class="blue_nav">{$arr_language['add']}</a>
+        </span>
+        <span class="J_submit_from"></span>
+</div>
+<div class="info_wrap main_table mt10">
+    <table>
+    	<tr>
+            <th style="text-align:left; padding-left:10px;">{$arr_language['admin_member_group']['group_name']}</th>
+            <th class="table_w4">{$arr_language['admin_member']['do']}</th>
+        </tr>
+        {if $arr_list['total']>0}
+        {loop $arr_list['list'] $v}
+        <tr class="white">
+            <td style="text-align:left; padding-left:10px;">{$v['group_name']}</td>
+            <td class="table_nav">
+            	<a href="/admin.php?mod=member_group&mod_dir=setting&extra=set_permission&gid={$v['gid']}" class="blue_nav admin_nav">{$arr_language['admin_member_group']['set_allow']}</a>
+            	<a href="/admin.php?mod=member_group&mod_dir=setting&extra=add&gid={$v['gid']}" class="blue_nav admin_nav">{$arr_language['mod']}</a>
+                <a href="javascript:;" class="gray_nav admin_nav J_btn_del" data-gid="{$v['gid']}">{$arr_language['del']}</a>
+			</td>
+        </tr>
+        {/loop}
+        {else}
+        <tr class="white">
+            <td colspan="2"><div class="no-data">{$arr_language['nothing']}</div></td>
+        </tr>
+        {/if}
+    </table>
+</div>
+<!--]] 列表 -->
+<!-- page [[-->
+
+<div class="info_wrap mt20">
+	<div class="page">{$str_num_of_page}</div>
+</div>
+<!--]] page -->
+<script type="text/javascript" src="/mat/??dist/js/lib/jquery/jquery.min.js,dist/js/language/admin_zh_cn.js,dist/js/modules/common.js,dist/js/admin/admin_member_group.js?code_version={$_SGLOBAL['code_version']}"></script>
+<script type="text/javascript">
+var str_formhash = '{$_SGLOBAL['formhash']}';
+admin_member_group._listen_del();
+</script>
+<!--{template template/admin/footer}-->

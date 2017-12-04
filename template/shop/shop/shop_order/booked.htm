@@ -1,0 +1,71 @@
+<!--{template template/shop/header}-->
+<!-- 列表 [[-->
+<div class="product_search">
+    <form id="search_form" method="post" action="/shop.php?mod=order&extra=booked">
+        <input type="hidden" name="mod" value="order">
+        <input type="hidden" name="extra" value="booked">
+        <dl class="mt10 f_l" style="width:auto;">
+            <dt class="ml15">用户名:</dt>
+            <dd><input value="{$str_name}" name="name" class="text"></dd>
+        </dl>
+
+        <dl class="mt10 f_l" style="width:auto;">
+            <dt class="ml15">手机号:</dt>
+            <dd><input value="{$str_phone}" name="phone" class="text"></dd>
+            <dt class="ml15 add_navbox"><input type="submit" style="margin-top:0;" value="搜索" class="blue_nav"></dt>
+        </dl>    
+    </form>
+</div>
+<div style="clear:both; height:0; overflow:hidden;"></div>
+<div class="info_wrap main_table mt10">
+    <table>
+    	<tr>
+            <th class="table_w3" style="text-align:left; padding-left:10px;">用户名</th>
+            <th class="table_w3">联系人</th>
+            <th class="table_w3">手机号</th>
+            <th class="table_w5">备注</th>
+            <th class="table_w5">预定时间</th>
+            <th class="table_w5">操作</th>
+        </tr>
+        {if $arr_list['total']>0}
+        {loop $arr_list['list'] $v}
+        <tr class="white">
+            <td style="text-align:left; padding-left:10px;">{$v['user']['nickname']}{if $v['item']['pic']}<img src="<!--{eval echo resize_image($v['item']['pic'],200)}-->" style=" height:50px;" />{/if}</td>
+            <td>{$v['contact']}</td>
+            <td>{$v['phone']}</td>
+            <td><textarea style="height: 50px；width:100%">{$v['des']}</textarea></td>
+            <td><!--{eval echo date('Y-m-d H:i:s',$v['in_date'])}--></td>
+            <td class="table_nav">
+                {if $v['status']==100}
+            	<a{if $arr_languages} style="width:50px;" {/if} href="javascript:;" class="blue_nav admin_nav J_btn_confirm" data-id="{$v['booked_id']}">确认到店</a>
+                <a{if $arr_languages} style="width:50px;" {/if} href="javascript:;" class="gray_nav admin_nav J_btn_del" onclick="return false;" data-id="{$v['booked_id']}">未到店</a>
+                {/if}
+                {if $v['status']==200}
+                客人已到店
+                {/if}
+                {if $v['status']==90}
+                <span style="color:red">客人未到</span>
+                {/if}
+            </td>
+        </tr>
+        {/loop}
+        {else}
+        <tr class="white">
+            <td colspan="{if $arr_languages}7{else}6{/if}"><div class="no-data">{$arr_language['nothing']}</div></td>
+        </tr>
+        {/if}
+    </table>
+</div>
+<!--]] 列表 -->
+<!-- page [[-->
+
+<div class="info_wrap mt20">
+	<div class="page">{$str_num_of_page}</div>
+</div>
+<!--]] page -->
+<script type="text/javascript" src="/mat/??dist/js/lib/jquery/jquery.min.js,dist/js/language/admin_zh_cn.js,dist/js/modules/common.js,dist/js/shop/shop_order.js?code_version={$_SGLOBAL['code_version']}"></script>
+<script type="text/javascript">
+var str_formhash = '{$_SGLOBAL['formhash']}';
+shop_booked._init()
+</script>
+<!--{template template/index/footer}-->

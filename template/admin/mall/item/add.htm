@@ -1,0 +1,251 @@
+<!--{template template/admin/header}-->
+<script type="text/javascript" charset="utf-8" src="/lib/editor_lemb/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/lib/editor_lemb/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="/lib/editor_lemb/lang/zh-cn/zh-cn.js"></script>
+<form id="J_send_form" action="/admin.php?mod=item&mod_dir=mall&extra=add" method="post" target="ajaxframeid" enctype="Multipart/form-data">
+    <input type="hidden" name="formhash" value="{$_SGLOBAL['formhash']}">
+    <input class="J_callback" type="hidden" name="callback" value="parent.send_success">
+    <input id="J_item_id" type="hidden" name="item_id" value="{if $int_copy==0}{$arr_item['main']['item_id']}{/if}" />
+    <input id="J_form_do" name="form_do" type="hidden" />
+    <input id="J_upload_type" name="upload_type" type="hidden" />
+    <input id="J_editor_pic_max_size" type="hidden" value="{$arr_config['item_editor_pic']['val']}" />
+    <!--
+	<input id="J_pic_max_width" type="hidden" value="760" />
+	<input type="hidden" id="J_editor_pic_size_tip" value="图片最佳为宽度760px,最大高度不要超过1000px" />
+    -->
+<div class="form_list mt10 trade">
+{if $arr_languages}
+	<dl class="mt12">
+        <dt>{$arr_language['language']}:</dt>
+        <dd>
+        	<select id="J_language" name="language" style="height:36px; line-height:36px;">
+            	<option value="0">{$arr_language['select']}</option>
+            {loop $arr_languages $v}
+            	<option value="{$v['cname']}"{if $arr_item['main']['language']==$v['cname']} selected="selected"{/if}>{$v['name']}</option>
+            {/loop}
+            </select>
+            <span class="tips red">*</span>
+        </dd>
+    </dl>
+{/if}
+	<dl class="mt12">
+        <dt>{$arr_language['cat']}:</dt>
+        <dd>
+        	<select id="J_cid_1" name="cid_1" data-cid="{$arr_item['main']['cid_1']}" style="height:36px; line-height:36px;">
+            	<option value="0">{$arr_language['select']}</option>
+            {loop $arr_cat $v}
+            	{if $v['pid']==0}
+            	<option value="{$v['cid']}">{$v['name']}</option>
+                {/if}
+            {/loop}
+            </select>
+            
+            <select id="J_cid_2" name="cid_2" data-cid="{$arr_item['main']['cid_2']}" style="height:36px; line-height:36px; display:none;"></select>
+            <span class="tips red">*</span>
+        </dd>
+    </dl>
+    <dl class="mt12">
+        <dt>{$arr_language['status']}:</dt>
+        <dd>
+            <select id="J_status" name="status" style="height:36px; line-height:36px;">
+            	<option value="200"{if $arr_item['main']['status']==$int_active} selected="selected"{/if}>{$arr_language['item']['active']}</option>
+                <option value="100"{if $arr_item['main']['status']==$int_inactive} selected="selected"{/if}>{$arr_language['item']['inactive']}</option>
+            </select>
+            <span class="tips red">*</span>
+        </dd>
+    </dl>
+    <dl class="mt12">
+        <dt>{$arr_language['item']['title']}:</dt>
+        <dd>
+        	<input id="J_title" type="text" name="title" class="text_s" autocomplete="off" value="{$arr_item['main']['title']}" style="width:400px;"><span class="tips red">*</span>
+        </dd>
+    </dl>
+    <dl class="mt12">
+        <dt>{$arr_language['item']['des']}:</dt>
+        <dd>
+            <input type="text" name="des" class="text_s" autocomplete="off" value="{$arr_item['detail']['des']}" style="width:400px;">
+        </dd>
+    </dl>
+    <dl class="mt12">
+        <dt>{$arr_language['item']['des_2']}:</dt>
+        <dd>
+        	<input type="text" name="des_2" class="text_s" autocomplete="off" value="{$arr_item['detail']['des_2']}" style="width:400px;">
+        </dd>
+    </dl>
+    <dl class="mt12">
+        <dt>{$arr_language['price']}：</dt>
+        <dd><input id="J_price" type="text" name="price" class="text_z" value="{$arr_item['main']['price']}" autocomplete="off"><span class="tips red">*</span></dd>
+    </dl>
+    <dl class="mt12">
+        <dt>是否热销:</dt>
+        <dd>
+            <input type="checkbox" name="is_hot" class="text_s" autocomplete="off" {if $arr_item['main']['is_hot']}checked="checked{/if}" style="width:auto;">
+        </dd>
+    </dl>
+    
+    <dl class="mt12">
+        <dt>是否推荐:</dt>
+        <dd>
+            <input type="checkbox" name="is_remind" class="text_s" autocomplete="off" {if $arr_item['main']['is_remind']}checked="checked"{/if} style="width:auto;">
+        </dd>
+    </dl>
+    <dl class="mt12">
+        <dt>{$arr_language['sort']}:</dt>
+        <dd>
+        	<input id="J_sort" type="text" name="sort" class="text_s" autocomplete="off" value="{if isset($arr_item['main']['sort'])}{$arr_item['main']['sort']}{else}200{/if}">
+            <span class="tips red">{$arr_language['sort_des']}</span>
+        </dd>
+    </dl>
+    
+    <dl class="mt12">
+        <dt>{$arr_language['item']['sku_type']}：</dt>
+        <dd>
+            <span class="check"><input class="J_att_type" name="att_type" type="radio" value="0" checked="checked"><em>{$arr_language['item']['sku_type_no']}</em></span>
+            <span class="check"><input class="J_att_type" name="att_type" type="radio" value="1" ><em>{$arr_language['item']['sku_type_1']}</em></span>
+            <span class="check"><input class="J_att_type" name="att_type" type="radio" value="2" ><em>{$arr_language['item']['sku_type_2']}</em></span>
+        </dd>
+    </dl>
+    
+    <!-- 单属性 [[-->
+    <dl class="J_sku_title mt12" style="display:none;">
+        <dt>属性名称：</dt>
+        <dd><input class="text_z" name="sku_title[0]" value="" autocomplete="off"><span class="tips gray">一级名称</span></dd>
+    </dl>
+    <!-- 双属性 [[-->
+    <dl class="J_sku_title mt12" style="display:none;">
+        <dt>&nbsp;</dt>
+        <dd><input class="text_z" name="sku_title[1]" value="" autocomplete="off"><span class="tips">二级名称</span></dd>
+    </dl>
+    <!--]] 双属性 -->
+    
+    
+        <!--
+     <dl class="mt12 J_no_att_type">
+        <dt>{$arr_language['item']['stock']}：</dt>
+        <dd><input id="J_stock" type="text" name="stock" class="text_z" value="{$arr_item['item_main']['stock']}"><span class="tips red">*</span></dd>
+    </dl>
+    -->
+    <!--
+    <dl class="mt12" id="J_pic_box">
+        <dt>{$arr_language['pic']}:</dt>
+        <dd style="position:relative;" id="J_img_add_dd">
+            <input type="hidden" name="pic_url" value="{$arr_item['main']['pic']}" id="J_pic_url" style="float:left;"/>
+            <input name="pic" id="J_pic" type="file" style="filter:alpha(opacity=0);-moz-opacity:0;opacity:0;width:100px;height:36px;position:absolute;left:0;top:0;cursor: pointer;float:left;">
+            <a class="upload_pic f_l" href="javascript:;">{$arr_language['upload']}</a>
+            <span class="size f_l ml10 gray"><span class="tips red">*</span> {$arr_language['best']}:<em id="J_best_size">{$str_main_pic_size}</em></span>
+            <div class="up_pic_box">
+                <span id="J_pic_show">{if $arr_item['main']['pic']}<img src="<!--{eval echo resize_image($arr_item['main']['pic'],320)}-->" style="width:100px;" />{/if}</span>
+            </div>
+        </dd>
+    </dl>
+    -->
+    <dl class="mt12">
+        <dt>{$arr_language['item']['pic']}：</dt>
+        <dd>
+            <div class="goods_img">
+                <div id="J_pic_upload" class="goods_upload">
+                    <span class="f_l">{$arr_language['item']['change_pic']}：</span>
+                    <span class="f_r">
+                    	<div style="position:relative;">
+                        	<input id="J_pic_upload_status" type="button" value="{$arr_language['uploads']['upload']}">
+                            <input id="J_pic_upload_btn" type="file" style="position:absolute;left:0;top:0;width:80px;height:32px;filter:alpha(opacity=0);-moz-opacity:0;opacity:0;cursor:pointer;" id="J_upload_main_btn" name="pic" accept="image/*">
+                        </div>
+                    </span>
+                </div>
+                <div class="goods_data">
+                    <h2>{$arr_language['best']}:<b>{$str_main_pic_size}</b></h2>
+                    <ul id="J_pic_list">
+                        <!--{eval $int_li_num = 5 - count($arr_pics);}-->
+                        {loop $arr_pics $v}
+                        <li>
+                        <input type="hidden" name="item_pic" value="{$v}"/>
+                        </li>
+                        {/loop}
+                        <!--{eval for($i=0;$i<$int_li_num;$i++){}-->
+                        <li>{if $int_li_num==5 && $i==0}<font><em>*</em> {$arr_language['item']['main_pic']}</font>{/if}</li>
+                        <!--{eval }}-->
+                    </ul>
+                </div>
+            </div>
+        </dd>
+    </dl>
+    
+    <dl id="J_sku_list" class="mt12" style=" display:none;">
+        <dt>&nbsp;</dt>
+        <dd>
+            <table></table>
+        </dd>
+    </dl>
+    <!--
+    <dl class="mt12 ">
+        <dt>{$arr_language['item']['sku_1']}：</dt>
+        <dd style="line-height:36px; font-size:14px;">
+        {loop $arr_sku $v}
+        	{if $v['level']==1}
+        	<input id="J_sku_1_{$v['sku_id']}" class="J_sku_1" data-name="{$v['name']}" type="checkbox" value="{$v['sku_id']}" {if isset($arr_item_sku_1[$v['sku_id']])} checked="checked"{/if}/>{$v['name']}
+            {/if}
+        {/loop}
+        </dd>
+    </dl>
+    <dl class="mt12 ">
+        <dt>{$arr_language['item']['sku_2']}：</dt>
+        <dd style="line-height:36px; font-size:14px;">
+        {loop $arr_sku $v}
+        	{if $v['level']==2}
+        	<input id="J_sku_2_{$v['sku_id']}" class="J_sku_2" data-name="{$v['name']}" type="checkbox" value="{$v['sku_id']}" {if isset($arr_item_sku_2[$v['sku_id']])} checked="checked"{/if}/>{$v['name']}
+            {/if}
+        {/loop}
+        </dd>
+    </dl>
+    
+    <dl class="mt12 ">
+        <dt>{$arr_language['item']['special_sku_2']}：</dt>
+        <dd style="line-height:36px; font-size:14px;">
+        <input type="checkbox" name="special_size"{if $arr_item['main']['special_size']} checked="checked"{/if} value="1" />
+        </dd>
+    </dl>
+    <dl id="J_sku_list" class="mt12" style=" display:none;">
+        <dt>&nbsp;</dt>
+        <dd>
+            <table></table>
+        </dd>
+    </dl>
+    -->
+    <dl class="mt12">
+        <dt>{$arr_language['page']['content']}:</dt>
+        <dd>
+            <div>
+            <script id="editor" type="text/plain" style="width:600px;height:500px;" name="content">{$arr_item['detail']['content']}</script>
+            </div>
+        </dd>
+    </dl>
+    <dl class="mt12">
+        <dt>{$arr_language['seo_title']}：</dt>
+        <dd><input type="text" name="page_title" class="text_s" autocomplete="off" value="{$arr_item['detail']['page_title']}" style="width:400px;"></dd>
+    </dl>
+    <dl class="mt12">
+        <dt>{$arr_language['seo_kwd']}：</dt>
+        <dd><input type="text" name="page_kwd" class="text_s"  autocomplete="off" value="{$arr_item['detail']['page_kwd']}" style="width:400px;"></dd>
+    </dl>
+    <dl class="mt12">
+        <dt>{$arr_language['seo_des']}：</dt>
+        <dd>
+            <textarea name="page_des" style="width:400px; line-height:34px; padding:0 10px;">{$arr_item['detail']['page_des']}</textarea>
+        </dd>
+    </dl>
+    <dl class="mt20">
+        <dt>&nbsp;</dt>
+        <dd class="sure_nav"><input type="submit" class="blue_nav" value="{$arr_language['send']}" style="border-radius:3px;height:52px; line-height:52px; width:158px; border:0; font-weight:700; font-size:16px;"></dd>
+    </dl>
+</div>
+</form>
+<script type="text/javascript" src="/mat/??dist/js/lib/jquery/jquery.min.js,dist/js/language/admin_zh_cn.js,dist/js/modules/common.js,dist/js/admin/admin_mall_item.js?code_version={$_SGLOBAL['code_version']}"></script>
+<script type="text/javascript">
+var ue = UE.getEditor('editor');
+admin_item_edit.json_cat = {$json_cat};
+admin_item_edit.json_config = {$json_config};
+admin_item_edit._init();
+admin_item_pics._init();
+admin_item_edit_att._init({$json_item_sku});
+</script>
+<!--{template template/admin/footer}-->

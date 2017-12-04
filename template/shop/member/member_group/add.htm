@@ -1,0 +1,32 @@
+<!--{template template/admin/header}-->
+<!-- 审核 [[-->
+<div class="form_list mt10">
+    <form id="J_send_form" action="/admin.php?mod=member_group&mod_dir=member&extra=add" method="post" target="ajaxframeid">
+        <input type="hidden" name="formhash" value="{$_SGLOBAL['formhash']}">  
+        <input class="J_callback" type="hidden" name="callback" value="parent.send_success">  
+        <input id="J_uid" type="hidden" name="gid" value="{$int_gid}">       
+        <dl class="mt12">
+            <dt>{$arr_language['admin_member_group']['group_name']}：</dt>
+            <dd><input id="J_group_name" type="text" name="group_name" class="text_s" autocomplete="off" value="{$arr_group['group_name']}"></dd>
+        </dl> 
+        <dl class="mt12">
+            <dt>最低购买量：</dt>
+            <dd><input type="text" name="min_buy_num" class="text_s" autocomplete="off" value="{$arr_group['min_buy_num']}"></dd>
+        </dl> 
+        <dl class="mt12">
+            <dt>{$arr_language['sort']}：</dt>
+            <dd><input type="text" name="sort" class="text_s" autocomplete="off" value="{if $arr_group['sort']}{$arr_group['sort']}{else}200{/if}"></dd>
+        </dl>                 
+        <dl class="mt20">
+            <dt>&nbsp;</dt>
+            <dd class="sure_nav"><input type="submit" class="blue_nav" value="{$arr_language['send']}" style="border-radius:3px;height:52px; line-height:52px; width:158px; border:0; font-weight:700; font-size:16px;"></dd>
+        </dl>
+    </form>
+</div>
+<!--]] 审核 -->
+<script type="text/javascript" src="/mat/??dist/js/lib/jquery/jquery.min.js,dist/js/language/admin_zh_cn.js,dist/js/modules/common.js,dist/js/admin/admin_index_member_group.js?code_version={$_SGLOBAL['code_version']}"></script>
+<script type="text/javascript">
+var str_formhash = '{$_SGLOBAL['formhash']}';
+admin_index_member_group._init();
+</script>
+<!--{template template/admin/footer}-->

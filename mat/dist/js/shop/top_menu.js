@@ -1,0 +1,1 @@
+var top_menu={_init:function(){$(".J_top_menu").click(function(){var a=$(this);$(".J_top_menu").removeClass("on"),a.addClass("on");var b=a.attr("data-url");b&&(window.parent.document.getElementById("ifr_main").src=b)})}};

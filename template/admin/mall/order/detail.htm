@@ -1,0 +1,148 @@
+<!--{template template/admin/header}-->
+<input type='hidden' id="J_hid_order_id" value="{$arr_data['main']['order_id']}">
+<input type='hidden' id="J_hid_express" value="{$arr_data['detail']['express']}">
+<input type='hidden' id="J_hid_express_id" value="{$arr_data['detail']['express_id']}">
+<input type='hidden' id="J_hid_quyang_code" value="{$arr_data['detail']['quyang_code']}">
+
+<div class="admin_menu_s mt10"><input type="submit" class="blue_nav" value="{$arr_language['back']}" onclick="javascript:window.history.back(-1);"></div>
+<div class="orders_status">
+    {$arr_language['status']}：<!--{eval echo LEM_order::get_status($arr_data['main']['status']);}-->
+    {if $arr_data['main']['status'] == LEM_order::ORDER_PAY}
+        <p>
+        	<a href="javascript:;" class="red_nav" id="J_add_express">{$arr_language['order']['order_send_2']}</a>
+            <a href="javascript:;" class="blue_nav" id="J_mod_quyang_code">{$arr_language['order']['mod_quyang_code']}</a>
+        </p>
+    {elseif $arr_data['main']['status'] == LEM_order::ORDER_SEND}    
+        <p>
+        	<a href="javascript:;" class="blue_nav" id="J_mod_express">{$arr_language['order']['mod_express']}</a>
+            <a href="javascript:;" class="blue_nav" id="J_mod_quyang_code">{$arr_language['order']['mod_quyang_code']}</a>
+        </p>
+    {/if}
+</div>
+<div class="vip_show_list mt10">
+	<ul>
+    	<li class="J_change_info" data-index="0"><a href="javascript:;" class="on">{$arr_language['order']['order_info']}</a></li>
+        <li class="J_change_info" data-index="1"><a href="javascript:;">{$arr_language['order']['express_info']}</a></li>
+    </ul>
+</div>
+<!-- 列表 [[-->
+<div class="money_list">
+	<div class="order_buyerss">
+    	<h1>{$arr_language['order']['buyer']}</h1>
+        <ul>
+            <li><em>{$arr_language['order']['buyer_name']}：</em><a>{if $arr_data['main']['uid']>0}{$arr_data['buyer']['username']}{else}{$arr_language['guests']}{/if}</a></li>
+        </ul>
+    </div>
+    <!-- 商品信息 [[-->
+    <table class="order_show_list mt15" id="J_table_order" >
+    	<tr>
+            <th>
+                <div class="order_show_p">
+                    <table>
+                    <tr>
+                        <td class="img">&nbsp;</td>
+                        <td class="name">{$arr_language['order']['item']}</td>
+                        <td class="price">{$arr_language['price']}</td>
+                        <td class="data">{$arr_language['num']}</td>
+                    </tr>
+                </table>
+                </div>
+            </th>
+            <th class="w140">{$arr_language['order']['remark_2']}</th>
+            <th class="w140">{$arr_language['price']}</th>
+             <th class="w140">{$arr_language['status']}</th>
+        </tr>
+        
+        <tr>
+            <td style="padding:0;">
+                <div class="order_show_p">
+                    {loop $arr_data['item'] $v}
+                    <table>
+                        <tr>
+                            <td class="img">
+                                <a href="javascript:;" target="_blank">
+                                    <img src="{$v['item_main']['pic']}">
+                                </a>
+                            </td>
+                            <td class="name">
+                                <a href="javascript:;" target="_blank">{$v['item_main']['title']}</a>
+                                <p class="size">{$v['item_main']['sku_1_name']}</p>
+                                <p class="size">{if $v['special_sku_2']}{$v['special_sku_2']}{else}{$v['item_main']['sku_2_name']}{/if}</p>
+                            </td>                            
+                            <td class="price">
+                                {$arr_data['main']['total_price']}
+                            </td>
+                            <td class="data">{$v['num']}</td>
+                        </tr>
+                    </table>
+                    {/loop}
+                </div>    
+            </td>    
+            <td class="w160"><textarea id="J_remark_2">{$arr_data['detail']['remark_2']}</textarea></td>
+            <td class="w160">
+                <p class="price">{$arr_data['main']['total_price']}</p>
+            </td>
+            <td class="w160"><!--{eval echo LEM_order::get_status($arr_data['main']['status']);}--></td>
+        </tr>
+        <tr>
+           <td style="border-top:#e4e4e4 1px solid ">
+               {if $arr_data['detail']['remark']}
+               <p style="float:left;">{$arr_language['order']['remark']}:<em>{$arr_data['detail']['remark']}</em></p>
+                {else}
+                &nbsp;
+                {/if}
+            </td>            
+            <td colspan="3" class="money"><!--实收款：<b>{$arr_data['main']['total_price']}</b>-->&nbsp;</td>
+        </tr>
+    </table>
+    <!--]] 商品信息 -->
+    <div class="orders_other mt15 J_info">        
+    	<p>{$arr_language['order']['order_id']}:<em id="J_order_id">{$arr_data['main']['order_id']}</em></p>
+        {if !empty($arr_data['main']['third_pay_no'])}
+            <p>$arr_data['main']['pay_name']：{$arr_data['main']['third_pay_no']}</p>
+        {/if}
+        {if $arr_data['main']['in_date']}
+        <p>{$arr_language['order']['buy_date']}:<!--{eval echo date("Y-m-d H:i:s", $arr_data['main']['in_date']);}--></p>
+        {/if}
+        {if $arr_data['main']['pay_date']}
+        <p>{$arr_language['order']['pay_date']}:<!--{eval echo date("Y-m-d H:i:s", $arr_data['main']['pay_date']);}--></p>
+        {/if}
+        {if $arr_data['detail']['quyang_code']}
+        <p>{$arr_language['order']['mod_quyang_code']}:{$arr_data['detail']['quyang_code']}</p>
+        {/if}
+        {if $arr_data['main']['send_date']}
+        <p>{$arr_language['order']['send_date']}:<!--{eval echo date("Y-m-d H:i:s", $arr_data['main']['send_date']);}--></p>
+        {/if}
+    </div>
+    
+    <!-- 物流信息 [[-->
+    <div class="orders_other J_info" style="display:none;">
+    	<h1>{$arr_language['order']['express_info']}</h1>
+    	<p id="J_address_info_contact">{$arr_language['order']['contact']}:{$arr_data['detail']['contact']}</p>
+        <p id="J_address_info_mobile">{$arr_language['order']['phone']}:{$arr_data['detail']['phone']}</p>
+        <p>
+			<span id="J_address_info_detail" style="font-size:14px;">{$arr_language['order']['address']}:{$arr_district[$arr_data['detail']['province']]['name']}&nbsp;&nbsp;{$arr_district[$arr_data['detail']['city']]['name']}&nbsp;&nbsp;{$arr_district[$arr_data['detail']['area']]['name']}&nbsp;&nbsp;{$arr_data['detail']['address']}</span>
+			<!--<a id="J_mod_address" href="javascript:;" style="color:#228cc6; padding-left:10px;">{$arr_language['mod']}</a>-->
+		</p>
+        {if $arr_data['detail']['zip_code']}
+        <p>{$arr_language['order']['zip_code']}:{$arr_data['detail']['zip_code']}</p>
+        {/if}
+        
+        {if $arr_data['detail']['express']}                        
+        <p>{$arr_language['order']['express']}:{$arr_express[$arr_data['detail']['express']]['name']}</p>
+        {/if}
+        {if $arr_data['detail']['express_id']}                        
+        <p>{$arr_language['order']['express_id']}:{$arr_data['detail']['express_id']}</p>
+        {/if}
+		
+    </div>
+    <!--]] 物流信息 -->
+</div>
+<!--]] 列表 -->
+<script type="text/javascript" src="/mat/??dist/js/lib/jquery/jquery.min.js,dist/js/language/admin_zh_cn.js,dist/js/modules/common.js,dist/js/admin/admin_order.js?code_version={$_SGLOBAL['code_version']}"></script>
+<script type="text/javascript">
+admin_order_detail._init();
+admin_order_fahuo._init();
+admin_order_remark._init();
+</script>
+<!--{template template/admin/footer}-->

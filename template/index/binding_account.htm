@@ -1,0 +1,122 @@
+<!--{template template/index/header}-->
+
+<body>
+<!-- 头部 -->
+<div class="header">
+	<div class="hed_lf"><a href="/"><i class="icon iconfont icon-sanjiao"></i></a></div>
+	<div class="hed_ct">绑定账号</div>
+</div>
+<!-- 头部end -->
+
+<!-- container -->
+<div class="container">
+	<form id="J_send_form" action="/account/binding_account" method="post" target="ajaxframeid">
+        <input class="J_callback" type="hidden" name="callback" value="parent.send_success">
+        <input type="hidden" name="formhash" value="{$_SGLOBAL['formhash']}">
+	<div class="binding_account">
+		<ul>
+			<li><label>账号类型：</label>
+				<select name="type" id="J_type" style="height: 30px;font-size: 16px;border:none;width: 60%">
+					<option value="1" {if $int_type==1}selected{/if}>淘宝</option>
+					<option value="2" {if $int_type==2}selected{/if}>京东</option>
+					<option value="3" {if $int_type==3}selected{/if}>蘑菇街</option>
+					<option value="4" {if $int_type==4}selected{/if}>拼多多</option>
+				</select>
+			</li>
+			<li><label>账号：</label><input name="taobao" id="J_taobao" placeholder="请输入账号" value="{$arr_member_taobao['taobao']}" /></li>
+			<li><label>性 别</label><span><a id="sex_1" href="javascript:;" class="sex" data-sex="1"><i class="icon iconfont {if $arr_member_taobao['sex']==1 || !$arr_member_taobao['sex']}icon-dui active{else}icon-yuanquan{/if}"></i>男</a><a id="sex_2" href="javascript:;" class="sex" data-sex="2"><i class="icon iconfont {if $arr_member_taobao['sex']==2}icon-dui active{else}icon-yuanquan{/if}"></i>女</a></span></li>
+			<input type="hidden" name="sex" id="J_sex" value="1">
+		</ul>
+		<p class="beiz">绑定的任务帐号和性别，必须与提交的截图上现实的会员名、性别保持一致！（会员名不能是手机号或者邮箱）</p>
+		<div class="scre_enshot">
+			<p class="h3">上传手机账号截图：<a href="/page/p-6" id="J_jietu">截图示例</a></p>
+			<div class="up_img">
+				<dl>
+					<dd>
+						<a href="javascript:void(0);" class="input"><i class="icon iconfont icon-jia1" style="background-image: url({$arr_member_taobao['pics'][0]});background-size: 120px;background-repeat: no-repeat;"></i>我的<font class="str_type">淘宝</font>截图
+							<input type="file" id="file" class="J_file">
+							<input type="hidden" name="pic_url[1]" value="{$arr_member_taobao['pics'][0]}" class="J_file_url">
+						</a>
+						<div class="my-3" id="preview"></div>
+					</dd>
+					<dd>
+						<a href="javascript:void(0);" class="input"><i class="icon iconfont icon-jia1" style="background-image: url({$arr_member_taobao['pics'][1]});background-size: 120px;background-repeat: no-repeat;"></i>个人资料截图
+							<input type="file" id="file" class="J_file">
+							<input type="hidden" name="pic_url[2]" value="{$arr_member_taobao['pics'][1]}" class="J_file_url">
+						</a>
+						<div class="my-3" id="preview"></div>
+					</dd>
+					<div class="clearfix"></div>
+				</dl>
+			</div>
+		</div>
+		<p class="zhuy">注意：您绑定的淘宝帐号，需满足注册时间超一个月，完成支付宝实名认证，淘气值400以上等条件；提交后平台将在1个工作日内完成审核！</p>
+		<div class="tijiao" id="J_send"><a href="javascript:;">申请绑定</a></div>
+	</div>
+	</form>
+</div>
+<!-- /container -->
+
+
+<!-- footer -->
+<!--{template template/index/footer_menu}-->
+<!-- footer end -->
+
+<script src="/mat/dist/js/lib/jquery/jquery.min.js" type="text/javascript"></script>
+<script src="/mat/dist/js/modules/common.js" type="text/javascript"></script>
+<script src="/mat/dist/js/language/zh_cn.js" type="text/javascript"></script>
+<script type="text/javascript" src="/mat/src/js/index/account.js?code_version={$_SGLOBAL['code_version']}"></script>
+<script type="text/javascript" src="/mat/dist/js/upload/lrz.bundle.js?code_version={$_SGLOBAL['code_version']}"></script>
+
+<script type="text/javascript">
+account._init();
+$(function(){
+	var type = $('#J_type').val();
+	if (type!=1) {
+		$('.zhuy').hide()
+		if (type==2) {
+			$('.str_type').text('京东')
+			$('#J_jietu').attr('href','/page/p-7')
+		}else if(type==3){
+			$('.str_type').text('蘑菇街')
+			$('#J_jietu').attr('href','/page/p-8')
+		}else if(type==4){
+			$('.str_type').text('拼多多')
+			$('#J_jietu').attr('href','/page/p-9')
+		}
+	}else{
+		$('.str_type').text('淘宝')
+		$('#J_jietu').attr('href','/page/p-6')
+		$('.zhuy').show()
+	}
+})
+
+$('#J_type').change(function(){
+	var type = $(this).val();
+	window.location.href='/account/binding_account/type-'+type
+})
+
+$('#sex_1').click(function(){
+	var sex = $(this).attr('data-sex');
+	$('#J_sex').val(sex);
+	$('.icon-dui').addClass('icon-yuanquan')
+	$('.icon-dui').removeClass('active')
+	$('.icon-dui').removeClass('icon-dui')
+	$(this).find('i').addClass('icon-dui')
+	$(this).find('i').addClass('active')
+	$(this).find('i').removeClass('icon-yuanquan')
+})
+$('#sex_2').click(function(){
+	var sex = $(this).attr('data-sex');
+	$('#J_sex').val(sex);
+	$('.icon-dui').addClass('icon-yuanquan')
+	$('.icon-dui').removeClass('active')
+	$('.icon-dui').removeClass('icon-dui')
+	$(this).find('i').addClass('icon-dui')
+	$(this).find('i').addClass('active')
+	$(this).find('i').removeClass('icon-yuanquan')
+})
+	
+</script> 
+
+<!--{template template/index/footer}-->

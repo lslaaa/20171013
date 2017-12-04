@@ -1,0 +1,34 @@
+<!--{template template/shop/header}-->
+<!-- 审核 [[-->
+
+<div class="form_list mt10  trade">
+
+	<dl class="mt12">
+        <dt> 二维码：</dt>
+        <div style="float: left;text-align: center">
+            <img src="/shop.php?mod=shop&extra=watermarking&type=1&uid={$arr_member['uid']}&str_client=1492596097&str_server=hmGtBK0fLQ0Exm4n3JhfUwIP3pg=" style="width: 250px!important"><br>
+            <a href="/shop.php?mod=shop&extra=downfile&type=1&uid={$arr_member['uid']}&str_client=1492596097&str_server=hmGtBK0fLQ0Exm4n3JhfUwIP3pg=" class="blue_nav" style="border-radius:3px;height:52px; line-height:52px; width:158px; border:0; font-weight:700; font-size:16px;padding: 5px 10px">下载微信二维码</a>
+        </div>
+        <div style="float: left;text-align: center;margin-left: 10px">
+            <img src="/shop.php?mod=shop&extra=watermarking&type=2&uid={$arr_member['uid']}&str_client=1492596097&str_server=hmGtBK0fLQ0Exm4n3JhfUwIP3pg=" style="width: 250px!important"><br>
+            <a href="/shop.php?mod=shop&extra=downfile&type=2&uid={$arr_member['uid']}&str_client=1492596097&str_server=hmGtBK0fLQ0Exm4n3JhfUwIP3pg=" class="blue_nav"  style="border-radius:3px;height:52px; line-height:52px; width:158px; border:0; font-weight:700; font-size:16px;padding: 5px 10px;background-color: #76bded">下载支付宝二维码</a>
+        </div>
+        <div style="float: left;text-align: center;margin-left: 10px">
+            <img src="/shop.php?mod=shop&extra=watermarking&type=3&uid={$arr_member['uid']}&str_client=1492596097&str_server=hmGtBK0fLQ0Exm4n3JhfUwIP3pg=" style="width: 250px!important"><br>
+            <a href="/shop.php?mod=shop&extra=downfile&type=3&uid={$arr_member['uid']}&str_client=1492596097&str_server=hmGtBK0fLQ0Exm4n3JhfUwIP3pg=" class="blue_nav"  style="border-radius:3px;height:52px; line-height:52px; width:158px; border:0; font-weight:700; font-size:16px;padding: 5px 10px;background-color: #76bded">下载激活二维码</a>
+        </div>
+    </dl>
+
+    <dl class="mt20" style="display:none;">
+        <dt>&nbsp;</dt>
+        <dd class="sure_nav">
+            <input type="button" id="J_edit_phone" data="{$arr_shop_detail['phone']}" onclick="javascript:window.location.href='/shop.php?mod=shop&extra=qrcode&replace=1'" class="red_nav" value="重置二维码" style="border-radius:3px;height:52px; line-height:52px; width:158px; border:0; font-weight:700; font-size:16px;">
+            
+        </dd>
+    </dl>
+</div>
+<!--]] 审核 -->
+<script type="text/javascript" src="/mat/??dist/js/lib/jquery/jquery.min.js,dist/js/language/admin_zh_cn.js,dist/js/modules/common.js,dist/js/shop/admin_shop.js?code_version={$_SGLOBAL['code_version']}"></script>
+<script type="text/javascript">
+</script>
+<!--{template template/index/footer}-->

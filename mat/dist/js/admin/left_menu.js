@@ -1,0 +1,1 @@
+var left_menu={_init:function(){$(".J_menu_one").click(function(){var a=$(this),b=$(".J_menu_one").index(this);"javascript:;"==a.attr("href")&&($(".J_menu_two").css("display","none"),$(".J_menu_two").eq(b).css("display",""))})}};

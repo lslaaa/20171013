@@ -1,0 +1,94 @@
+<!--{template template/shop/header}-->
+<!-- 列表 [[-->
+<div class="product_search">
+    <form id="search_form" method="post" action="/shop.php?mod=shop&mod_dir=shop&extra=complaint">
+        <input type="hidden" name="mod" value="shop">
+        <input type="hidden" name="mod_dir" value="shop">
+        <input type="hidden" name="extra" value="complaint">
+        <dl class="mt10 f_l" style="width:auto;">
+            <dt class="ml15">用户名:</dt>
+            <dd><input value="{$str_name}" name="name" class="text"></dd>
+        </dl>
+
+        <dl class="mt10 f_l" style="width:auto;">
+            <dt class="ml15">商家名:</dt>
+            <dd><input value="{$str_shop_name}" name="shop_name" class="text"></dd>
+        </dl>
+        
+        <dl class="mt10 f_l" style="width:auto;">
+            <dt class="ml15">手机号:</dt>
+            <dd><input value="{$str_phone}" name="phone" class="text"></dd>
+            <dt class="ml15 add_navbox"><input type="submit" style="margin-top:0;" value="搜索" class="blue_nav"></dt>
+        </dl>
+        
+        
+    </form>
+</div>
+<div style="clear:both; height:0; overflow:hidden;"></div>
+<div class="vip_show_list mt10">
+    <ul>
+        <li><a href="/shop.php?mod=shop&mod_dir=shop&extra=complaint" {if $int_status==0}class="on"{/if}>全部</a></li>
+        <li><a href="/shop.php?mod=shop&mod_dir=shop&extra=complaint&status=100" {if $int_status==100}class="on"{/if}>待处理</a></li>
+        <li><a href="/shop.php?mod=shop&mod_dir=shop&extra=complaint&status=200" {if $int_status==200}class="on"{/if}>已处理</a></li>
+
+    </ul>
+</div>
+        
+<div class="info_wrap main_table mt10">
+    <table>
+    	<tr>
+            <th class="table_w5" style="text-align:left; padding-left:10px;">用户名</th>
+            <th class="table_w5">手机号</th>
+            <th class="table_w5">投诉商家</th>
+            <th class="table_w5">投诉内容</th>
+            <th class="table_w5">备注</th>
+            <th class="table_w5">投诉时间</th>
+            <th class="table_w5">操作</th>
+        </tr>
+        {if $arr_list['total']>0}
+        {loop $arr_list['list'] $v}
+        <tr class="white">
+            <td style="text-align:left; padding-left:10px;">
+            {$v['user']['nickname']}
+            </td>
+            <td>
+            {$v['phone']}
+            </td>
+            <td>
+            {$v['shop']['nickname']}
+            </td>
+            <td>
+            {$v['des']}
+            </td>
+            <td><p{if !$v['reply']} style="display:none;"{/if}>备注:<span class="J_reply">{$v['reply']}</span></p></td>
+            <td><!--{eval echo date("Y-m-d H:i:s",$v['in_date'])}--></td>
+            <td class="table_nav">
+            {if $v['status'] == 200}
+            <a href="javascript:;" class="J_btn_reply blue_nav admin_nav" data-id="{$v['id']}">已处理</a>
+            {else}
+            	<a href="javascript:;" class="J_btn_reply blue_nav admin_nav" data-id="{$v['id']}">确认处理</a>
+            {/if}
+			</td>
+        </tr>
+        {/loop}
+        {else}
+        <tr class="white">
+            <td colspan="6"><div class="no-data">{$arr_language['nothing']}</div></td>
+        </tr>
+        {/if}
+    </table>
+</div>
+<!--]] 列表 -->
+<!-- page [[-->
+
+<div class="info_wrap mt20">
+	<div class="page">{$str_num_of_page}</div>
+</div>
+
+<!--]] page -->
+<script type="text/javascript" src="/mat/??dist/js/lib/jquery/jquery.min.js,dist/js/language/admin_zh_cn.js,dist/js/modules/common.js,dist/js/shop/admin_shop.js?code_version={$_SGLOBAL['code_version']}"></script>
+<script type="text/javascript">
+var str_formhash = '{$_SGLOBAL['formhash']}';
+admin_complaint._init();
+</script>
+<!--{template template/index/footer}-->

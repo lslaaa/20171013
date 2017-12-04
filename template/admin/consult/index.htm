@@ -1,0 +1,61 @@
+<!--{template template/admin/header}-->
+<!-- 列表 [[-->
+<div class="vip_show_list mt10">
+    <ul>
+        <li><a href="/admin.php?mod=consult&mod_dir=consult" {if $int_status==0}class="on"{/if}>{$arr_language['all']}</a></li>
+        <li><a href="/admin.php?mod=consult&mod_dir=consult&status={LEM_consult::NO_DO}" {if $int_status == LEM_consult::NO_DO}class="on"{/if}>{$arr_language['consult']['no_do']}</a></li>
+        <li><a href="/admin.php?mod=consult&mod_dir=consult&status={LEM_consult::SUCCESS}" {if $int_status == LEM_consult::SUCCESS}class="on"{/if}>{$arr_language['consult']['success']}</a></li>
+
+    </ul>
+</div>
+        
+<div class="info_wrap main_table mt10">
+    <table>
+    	<tr>
+            <th class="" style="text-align:left; padding-left:10px;">{$arr_language['info']}</th>
+            <th class="table_w5">{$arr_language['status']}</th>
+            <th class="table_w5">{$arr_language['date']}</th>
+            <th class="table_w5">{$arr_language['admin_member']['do']}</th>
+        </tr>
+        {if $arr_list['total']>0}
+        {loop $arr_list['list'] $v}
+        <tr class="white">
+            <td style="text-align:left; padding-left:10px;">
+            	<p>{$v['name']}</p>
+                <p>{$v['phone']}</p>
+                <p>{$v['des']}</p>
+                <p{if !$v['reply']} style="display:none;"{/if}>{$arr_language['consult']['reply']}:<span class="J_reply">{$v['reply']}</span></p>
+            </td>
+            <td><!--{eval echo LEM_consult::get_status($v['status'])}--></td>
+            <td><!--{eval echo date("Y-m-d H:i:s",$v['in_date'])}--></td>
+            <td class="table_nav">
+            {if $v['status'] == LEM_consult::SUCCESS}
+            <a href="javascript:;" class="J_btn_reply blue_nav admin_nav" data-id="{$v['id']}">{$arr_language['consult']['success']}</a>
+            {else}
+            	<a href="javascript:;" class="J_btn_reply blue_nav admin_nav" data-id="{$v['id']}">{$arr_language['consult']['reply']}</a>
+            {/if}
+            <a{if $arr_languages} style="width:50px;" {/if} href="javascript:;" class="gray_nav admin_nav J_btn_del" onclick="return false;" data-id="{$v['id']}">{$arr_language['del']}</a>
+			</td>
+        </tr>
+        {/loop}
+        {else}
+        <tr class="white">
+            <td colspan="4"><div class="no-data">{$arr_language['nothing']}</div></td>
+        </tr>
+        {/if}
+    </table>
+</div>
+<!--]] 列表 -->
+<!-- page [[-->
+
+<div class="info_wrap mt20">
+	<div class="page">{$str_num_of_page}</div>
+</div>
+
+<!--]] page -->
+<script type="text/javascript" src="/mat/??dist/js/lib/jquery/jquery.min.js,dist/js/language/admin_zh_cn.js,dist/js/modules/common.js,dist/js/admin/admin_consult.js?code_version={$_SGLOBAL['code_version']}"></script>
+<script type="text/javascript">
+var str_formhash = '{$_SGLOBAL['formhash']}';
+admin_consult._init();
+</script>
+<!--{template template/admin/footer}-->

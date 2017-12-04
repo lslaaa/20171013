@@ -1,0 +1,167 @@
+<!--{template template/admin/header}-->
+<link rel="stylesheet" type="text/css" href="/lib/uploadify/uploadify.css">
+<script type="text/javascript" charset="utf-8" src="/lib/editor_lemb/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/lib/editor_lemb/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="/lib/editor_lemb/lang/zh-cn/zh-cn.js"></script>
+
+<form id="J_send_form" action="/admin.php?mod=video&mod_dir=video&extra=add" method="post" target="ajaxframeid" enctype="Multipart/form-data">
+    <input type="hidden" name="formhash" value="{$_SGLOBAL['formhash']}">
+    <input class="J_callback" type="hidden" name="callback" value="parent.send_success">  
+    <input type="hidden" name="id" value="{if $int_copy==0}{$arr_pic['main']['id']}{/if}" />
+    <input id="J_form_do" name="form_do" type="hidden" />
+    <!--
+	<input id="J_pic_max_width" type="hidden" value="760" />
+	<input type="hidden" id="J_editor_pic_size_tip" value="图片最佳为宽度760px,最大高度不要超过1000px" />
+    -->
+<div class="form_list mt10 trade">
+{if $arr_languages}
+	<dl class="mt12">
+        <dt>{$arr_language['language']}:</dt>
+        <dd>
+        	<select id="J_language" name="language" style="height:36px; line-height:36px;">
+            	<option value="0">{$arr_language['select']}</option>
+            {loop $arr_languages $v}
+            	<option value="{$v['cname']}"{if $arr_pic['main']['language']==$v['cname']} selected="selected"{/if}>{$v['name']}</option>
+            {/loop}
+            </select>
+            <span class="tips red">*</span>
+        </dd>
+    </dl>
+{/if}
+    <dl id="J_cat" class="mt12">
+        <dt>{$arr_language['cat']}:</dt>
+        <dd>
+        	<select id="J_cid" name="cid" data-cid="{$arr_pic['main']['cid_1']}" style="height:36px; line-height:36px;">
+            	<option value="0">{$arr_language['select']}</option>
+            {loop $arr_cat $v}
+            	{if $v['pid']==0}
+            	<option value="{$v['cid']}" p_type="{$v['type']}">{$v['name']}</option>
+                {/if}
+            {/loop}
+            </select>
+            <select id="J_cid_2" name="cid_2" data-cid="{$arr_pic['main']['cid_2']}" style="height:36px; line-height:36px; display:none;"></select>
+            <select id="J_cid_3" name="cid_3" data-cid="{$arr_pic['main']['cid_3']}" style="height:36px; line-height:36px; display:none;"></select>
+            <span class="tips red">*</span>
+        </dd>
+    </dl>
+
+    
+<dl class="mt12" style="display:;">
+        <dt>{$arr_language['title']}:</dt>
+        <dd>
+            <!--{eval 
+                $str_title = '';
+                $obj_pic = L::loadClass('pic','index');
+                if($arr_pic['main']['id']){
+                    if($arr_pic['main']['cid_1']){
+                        $arr_one_cat = $obj_pic->get_one_cat($arr_pic['main']['cid_1']);
+                    }
+                    if($arr_pic['main']['cid_2']){
+                        $arr_two_cat = $obj_pic->get_one_cat($arr_pic['main']['cid_2']);
+                    }
+                    $str_cat = $arr_two_cat['name']?$arr_two_cat['name']:$arr_one_cat['name'];
+                    $str_title = $arr_pic['main']['title']?$arr_pic['main']['title']:$str_cat;
+                }
+            }-->
+            <input id="J_title" type="text" name="title" class="text_s" autocomplete="off" value="{$str_title}" style="width:400px;">
+        </dd>
+    </dl>
+    
+    <dl class="mt12 J_pic_box">
+        <dt>{$arr_language['pic']}:</dt>
+        <dd style="position:relative;" id="J_img_add_dd">
+            <input type="hidden" name="pic_url[]" value="{$arr_pic['main']['pic']}" class="J_pic_url" style="float:left;"/>
+            <input name="pic" class="J_pic" type="file" style="filter:alpha(opacity=0);-moz-opacity:0;opacity:0;width:100px;height:36px;position:absolute;left:0;top:0;cursor: pointer;float:left;">
+            <a class="upload_pic f_l" href="javascript:;">{$arr_language['upload']}</a>
+            <span class="size f_l ml10 gray">{$arr_language['best']}:<em id="J_best_size">{$str_pic_size}</em></span>
+            <div class="up_pic_box">
+                <span class="J_pic_show">{if $arr_pic['main']['pic']}<img src="{$arr_pic['main']['pic']}" style="width:100px;" />{/if}</span>
+                <div style="overflow:hidden; height:0; clear:both;"></div>
+            </div>
+        </dd>
+    </dl>
+
+    <dl class="mt12 J_video_box">
+        <dt>上传视频:</dt>
+        <dd>
+            <input type="hidden" value="{$arr_pic['main']['video']}" name="video_url" id="J_video_url">
+            <input type="file" value="Filedata" id="fileupload1"> 
+            <div class="up_pic_box">
+                <span class="J_video_show">
+                    {if $arr_pic['main']['video']}
+                        <video width="400px" controls="">
+                            <source src="{$arr_pic['main']['video']}">
+                            Your browser does not support the video tag.
+                        </video>
+                    {/if}
+                </span>
+                <div style="overflow:hidden; height:0; clear:both;"></div>
+            </div>
+            <input style="display: none;" type="button" onclick="javascript:$('#fileupload1').uploadify('upload','*')" value="確定上傳">
+        </dd>
+    </dl>
+    
+    <dl class="mt12 J_video_box">
+        <dt>第三方视频代码:</dt>
+        <dd>
+            <textarea id="J_video_code" name="video_code" style="width:400px; line-height:34px; padding:0 10px;">{$arr_pic['main']['video_code']}</textarea>
+        </dd>
+    </dl>
+    <dl class="mt12">
+        <dt>视频介绍:</dt>
+        <dd>
+            <div>
+            <script id="editor" type="text/plain" style="width:600px;height:500px;" name="content">{$arr_pic['detail']['content']}</script>
+            </div>
+        </dd>
+    </dl>
+
+    <dl class="mt20">
+        <dt>&nbsp;</dt>
+        <dd class="sure_nav"><input type="submit" class="blue_nav" value="{$arr_language['send']}" style="border-radius:3px;height:52px; line-height:52px; width:158px; border:0; font-weight:700; font-size:16px;"></dd>
+    </dl>
+</div>
+</form>
+
+<script type="text/javascript" src="/mat/??dist/js/lib/jquery/jquery.min.js,dist/js/language/admin_zh_cn.js,dist/js/modules/common.js,dist/js/admin/admin_video.js?code_version={$_SGLOBAL['code_version']}"></script>
+<script type="text/javascript" src="/lib/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript">
+//admin_pic.json_cat = {$json_cat};
+var ue = UE.getEditor('editor');
+admin_video._init();
+</script>
+<script type="text/javascript">
+    $(function() {
+        $.fileupload1 = $('#fileupload1').uploadify({
+            'auto' : true,
+            'formData' : {
+                'fcharset' : 'ISO-8859-1',
+                'writetoken' : 'ba4fba98-7e73-464d-b64c-3bc4baa5c08b',
+                'cataid':'1',
+                'JSONRPC'     : '{"title": "这里是标题", "tag": "标签", "desc": "视频文档描述"}'
+            },
+            'buttonText': '请选择文件',
+            'fileSizeLimit' : '3000MB',
+            'fileTypeDesc' : '视频文件',
+            'fileTypeExts' : '*.avi; *.wmv; *.mp4;*.mp3; *.mov; *.flv; *.mkv; *.rmvb',//文件类型过滤
+            'swf'      : '/lib/uploadify/uploadify.swf',
+            'multi':true,
+            'successTimeout':1800,
+            'queueSizeLimit':100,
+            'uploader' : '/admin.php?mod=video&mod_dir=video&extra=upload_video&str_client=bat_card&str_server=jfrLmL6ZX3eSBFbwFK87Slv5qJc%3D',
+            //onUploadSuccess为上传完视频之后回调的方法，视频json数据data返回，
+            //下面的例子演示如何获取到vid
+            'onUploadSuccess':function(file,data,response){
+				//console.log(data);
+                var jsonobj=eval('('+data+')');      
+                $('#J_video_url').val(jsonobj.data);
+                var _ht = '<video width="400px" controls="">'+
+                             '<source src="'+jsonobj.data+'">'+
+                             'Your browser does not support the video tag.'+
+                        '</video>'; 
+                $('.J_video_show').html(_ht);
+            }
+        });
+    });
+</script>
+<!--{template template/admin/footer}-->

@@ -1,0 +1,89 @@
+<!--{template template/shop/header}-->
+<!-- 列表 [[-->
+<div class="product_search">
+    <form id="search_form" method="post" action="/shop.php?mod=shop&mod_dir=shop&extra=comment">
+        <input type="hidden" name="mod" value="shop">
+        <input type="hidden" name="mod_dir" value="shop">
+        <input type="hidden" name="extra" value="comment">
+        <dl class="mt10 f_l" style="width:auto;">
+            <dt class="ml15">用户名:</dt>
+            <dd><input value="{$str_name}" name="name" class="text"></dd>
+        </dl>
+
+        <dl class="mt10 f_l" style="width:auto;">
+            <dt class="ml15">商家名:</dt>
+            <dd><input value="{$str_shop_name}" name="shop_name" class="text"></dd>
+            <dt class="ml15 add_navbox"><input type="submit" style="margin-top:0;" value="搜索" class="blue_nav"></dt>
+        </dl>    
+    </form>
+</div>
+<div style="clear:both; height:0; overflow:hidden;"></div>
+<div class="vip_show_list mt10">
+    <ul>
+        <li><a href="/shop.php?mod=shop&mod_dir=shop&extra=complaint" {if $int_status==0}class="on"{/if}>全部</a></li>
+    </ul>
+</div>
+        
+<div class="info_wrap main_table mt10">
+    <table>
+    	<tr>
+            <th class="table_w5" style="text-align:left; padding-left:10px;">用户名</th>
+            <th class="table_w5">商家名</th>
+            <th class="table_w5">评价星级</th>
+            <th class="table_w5">评价内容</th>
+            <th class="table_w5">平均消费</th>
+            <th class="table_w5">评价图片</th>
+            <th class="table_w5">评价时间</th>
+            <th class="table_w5">操作</th>
+        </tr>
+        {if $arr_list['total']>0}
+        {loop $arr_list['list'] $v}
+        <tr class="white">
+            <td style="text-align:left; padding-left:10px;">
+            {$v['user']['nickname']}
+            </td>
+            <td>
+            {$v['shop']['nickname']}
+            </td>
+            <td>
+                <p>评价：<span style="color:red">{$v['star_1']}</span>星&nbsp;&nbsp;&nbsp;&nbsp;口味：<span style="color:red">{$v['star_2']}</span>星</p>
+                <p>环境：<span style="color:red">{$v['star_3']}</span>星&nbsp;&nbsp;&nbsp;&nbsp;服务：<span style="color:red">{$v['star_4']}</span>星</p>
+            </td>
+            <td>
+            {$v['des']}
+            </td>
+            <td>
+            {$v['price']}元
+            </td>
+            <td>
+                {loop $v['pics'] $v2}
+                    <a href="{$v2}" target="_bank"><img src="{$v2}" style="width: 50px;height: 50px;float: left"></a>
+                {/loop}
+            </td>
+            <td><!--{eval echo date("Y-m-d H:i:s",$v['in_date'])}--></td>
+            <td class="table_nav">
+        	   <a href="javascript:;" class="J_btn_del blue_nav admin_nav" data-id="{$v['id']}">删除</a>
+			</td>
+        </tr>
+        {/loop}
+        {else}
+        <tr class="white">
+            <td colspan="8"><div class="no-data">{$arr_language['nothing']}</div></td>
+        </tr>
+        {/if}
+    </table>
+</div>
+<!--]] 列表 -->
+<!-- page [[-->
+
+<div class="info_wrap mt20">
+	<div class="page">{$str_num_of_page}</div>
+</div>
+
+<!--]] page -->
+<script type="text/javascript" src="/mat/??dist/js/lib/jquery/jquery.min.js,dist/js/language/admin_zh_cn.js,dist/js/modules/common.js,dist/js/shop/admin_shop.js?code_version={$_SGLOBAL['code_version']}"></script>
+<script type="text/javascript">
+var str_formhash = '{$_SGLOBAL['formhash']}';
+admin_comment._init();
+</script>
+<!--{template template/index/footer}-->

@@ -1,0 +1,100 @@
+<!--{template template/admin/header}-->
+<script type="text/javascript" charset="utf-8" src="/lib/editor_lemb/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/lib/editor_lemb/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="/lib/editor_lemb/lang/zh-cn/zh-cn.js"></script>
+<form id="J_send_form" action="/admin.php?mod=case&mod_dir=case&extra=add" method="post" target="ajaxframeid" enctype="Multipart/form-data">
+    <input type="hidden" name="formhash" value="{$_SGLOBAL['formhash']}">
+    <input class="J_callback" type="hidden" name="callback" value="parent.send_success">  
+    <input type="hidden" name="id" value="{if $int_copy==0}{$arr_case['main']['id']}{/if}" />
+    <input id="J_form_do" name="form_do" type="hidden" />
+    <input id="J_editor_pic_max_size" type="hidden" value="{$arr_config['case_editor_pic']['val']}" />
+    <!--
+	<input id="J_pic_max_width" type="hidden" value="760" />
+	<input type="hidden" id="J_editor_pic_size_tip" value="图片最佳为宽度760px,最大高度不要超过1000px" />
+    -->
+<div class="form_list mt10 trade">
+{if $arr_languages}
+	<dl class="mt12">
+        <dt>{$arr_language['language']}:</dt>
+        <dd>
+        	<select id="J_language" name="language" style="height:36px; line-height:36px;">
+            	<option value="0">{$arr_language['select']}</option>
+            {loop $arr_languages $v}
+            	<option value="{$v['cname']}"{if $arr_case['main']['language']==$v['cname']} selected="selected"{/if}>{$v['name']}</option>
+            {/loop}
+            </select>
+            <span class="tips red">*</span>
+        </dd>
+    </dl>
+{/if}
+    <dl id="J_cat" class="mt12">
+        <dt>{$arr_language['cat']}:</dt>
+        <dd>
+        	<select id="J_province" name="province" data-province="{$arr_case['main']['province']}" style="height:36px; line-height:36px;"></select>
+        	<select id="J_cid" name="cid" data-cid="{$arr_case['main']['cid_1']}" style="height:36px; line-height:36px;">
+            	<option value="0">{$arr_language['select']}</option>
+            {loop $arr_cat $v}
+            	{if $v['pid']==0}
+            	<option value="{$v['cid']}">{$v['name']}</option>
+                {/if}
+            {/loop}
+            </select>
+            <select id="J_cid_2" name="cid_2" data-cid="{$arr_case['main']['cid_2']}" style="height:36px; line-height:36px; display:none;"></select>
+            <select id="J_cid_3" name="cid_3" data-cid="{$arr_case['main']['cid_3']}" style="height:36px; line-height:36px; display:none;"></select>
+            <span class="tips red">*</span>
+        </dd>
+    </dl>
+    <dl class="mt12">
+        <dt>{$arr_language['case']['title']}:</dt>
+        <dd>
+        	<input id="J_title" type="text" name="title" class="text_s" autocomplete="off" value="{$arr_case['main']['title']}" style="width:400px;"><span class="tips red">*</span>
+        </dd>
+    </dl>
+    <dl class="mt12">
+        <dt>{$arr_language['case']['des_1']}:</dt>
+        <dd>
+        	<input id="J_des_1" type="text" name="des_1" class="text_s" autocomplete="off" value="{$arr_case['main']['des_1']}" style="width:400px;">
+        </dd>
+    </dl>
+    <dl class="mt12">
+        <dt>{$arr_language['case']['des_2']}:</dt>
+        <dd>
+        	<input id="J_des_2" type="text" name="des_2" class="text_s" autocomplete="off" value="{$arr_case['main']['des_2']}" style="width:400px;"><span class="tips red">*</span>
+        </dd>
+    </dl>
+    <dl class="mt12" id="J_pic_box">
+            <dt>{$arr_language['pic']}:</dt>
+            <dd style="position:relative;" id="J_img_add_dd">
+                <input type="hidden" name="pic_url" value="{$arr_case['main']['pic']}" id="J_pic_url" style="float:left;"/>
+                <input name="pic" id="J_pic" type="file" style="filter:alpha(opacity=0);-moz-opacity:0;opacity:0;width:100px;height:36px;position:absolute;left:0;top:0;cursor: pointer;float:left;">
+                <a class="upload_pic f_l" href="javascript:;">{$arr_language['upload']}</a>
+                <span class="size f_l ml10 gray">{$arr_language['best']}:<em id="J_best_size">{$str_pic_size}</em></span>
+                <div class="up_pic_box">
+                    <span id="J_pic_show">{if $arr_case['main']['pic']}<img src="{$arr_case['main']['pic']}" style="width:100px;" />{/if}</span>
+                </div>
+            </dd>
+        </dl>
+    <dl class="mt12">
+        <dt>{$arr_language['page']['content']}:</dt>
+        <dd>
+            <div>
+            <script id="editor" type="text/plain" style="width:600px;height:500px;" name="content">{$arr_case['detail']['content']}</script>
+            </div>
+        </dd>
+    </dl>
+    <dl class="mt20">
+        <dt>&nbsp;</dt>
+        <dd class="sure_nav"><input type="submit" class="blue_nav" value="{$arr_language['send']}" style="border-radius:3px;height:52px; line-height:52px; width:158px; border:0; font-weight:700; font-size:16px;"></dd>
+    </dl>
+</div>
+</form>
+<script type="text/javascript">
+var ue = UE.getEditor('editor');
+</script>
+<script type="text/javascript" src="/mat/??dist/js/lib/jquery/jquery.min.js,dist/js/language/admin_zh_cn.js,dist/js/modules/common.js,dist/js/index/district.js,dist/js/admin/admin_case.js?code_version={$_SGLOBAL['code_version']}"></script>
+<script type="text/javascript">
+admin_case.json_cat = {$json_cat};
+admin_case._init();
+district._init('J_province');
+</script>
+<!--{template template/admin/footer}-->

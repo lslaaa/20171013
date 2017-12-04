@@ -1,0 +1,81 @@
+<!--{template template/admin/header}-->
+<!-- 列表 [[-->
+{if $bool_list}
+<div class="product_search">
+    <form action="/admin.php?mod=commission&mod_dir=mall&is_pay=0&list=1" method="get" id="search_form">
+    	<input type="hidden" value="commission" name="mod" />
+        <input type="hidden" value="mall" name="mod_dir" />
+        <input type="hidden" value="{$int_is_pay}" name="is_pay" />
+        <input type="hidden" value="{$bool_list}" name="list" />
+        <dl class="mt10">
+            <dt class="ml15">{$arr_language['order']['order_id']}:</dt>
+            <dd><input class="text"  name="order_id" value="{if $int_order_id}{$int_order_id}{/if}"></dd>
+            <dt class="ml15 add_navbox"><input type="submit" class="blue_nav" value="{$arr_language['search']}" style="margin-top:0;"/></dt>
+            
+        </dl>
+        
+    </form>
+</div>
+{/if}
+<div class="admin_menu mt12">
+        <span class="J_show_hide_menu">
+            <a id="J_add_level_one" href="/admin.php?mod=commission&mod_dir=mall&extra=pay" class="blue_nav" style="display:inline-block;">{$arr_language['commission']['do_pay']}</a>
+            <b class="red" style="display:inline;">{$arr_language['commission']['do_pay_des']}</b>
+        </span>
+        <span class="J_submit_from"></span>
+</div>
+<div class="vip_show_list mt10">
+    <ul>
+        <li><a href="/admin.php?mod=commission&mod_dir=mall" {if $int_is_pay==-2}class="on"{/if}>{$arr_language['all']}</a></li>
+        <li><a href="/admin.php?mod=commission&mod_dir=mall&is_pay=1" {if $int_is_pay==1}class="on"{/if}>{$arr_language['commission']['pay']}</a></li>
+        <li><a href="/admin.php?mod=commission&mod_dir=mall&is_pay=0" {if $int_is_pay==0 && !$bool_list}class="on"{/if}>{$arr_language['commission']['no_pay']}</a></li>
+         <li><a href="/admin.php?mod=commission&mod_dir=mall&is_pay=-1" {if $int_is_pay==-1 && !$bool_list}class="on"{/if}>{$arr_language['commission']['error_pay']}</a></li>
+        <li><a href="/admin.php?mod=commission&mod_dir=mall&is_pay=0&list=1" {if $bool_list}class="on"{/if}>{$arr_language['commission']['del_commission']}</a></li>
+        
+    </ul>
+</div>
+<div class="info_wrap main_table mt10">
+    <table>
+    	<tr>
+            <th class="" style="text-align:left; padding-left:10px;">{$arr_language['member']['username']}</th>
+            <th class="table_w5">{$arr_language['commission']['price']}</th>
+            {if $bool_list}
+            <th class="table_w5">{$arr_language['order']['order_id']}</th>
+            <th class="table_w5">{$arr_language['date']}</th>
+            <th class="table_w5">{$arr_language['admin_member']['do']}</th>
+            {/if}
+        </tr>
+        {if $arr_list['total']>0}
+        {loop $arr_list['list'] $v}
+        <tr class="white">
+            <td style="text-align:left; padding-left:10px;">{$v['username']}</td>
+            <td><!--{eval echo $v['total_price'] ? $v['total_price'] : $v['price']}--></td>
+            {if $bool_list}
+            <td>{$v['order_id']}</td>
+            <td><!--{eval echo date("Y-m-d H:i:s",$v['in_date'])}--></td>
+            <td class="table_nav">
+                <a href="javascript:;" class="gray_nav admin_nav J_btn_del" onclick="return false;" data-id="{$v['id']}">{$arr_language['del']}</a>
+			</td>
+            {/if}
+        </tr>
+        {/loop}
+        {else}
+        <tr class="white">
+            <td colspan="{if $bool_list}5{else}2{/if}"><div class="no-data">{$arr_language['nothing']}</div></td>
+        </tr>
+        {/if}
+    </table>
+</div>
+<!--]] 列表 -->
+<!-- page [[-->
+
+<div class="info_wrap mt20">
+	<div class="page">{$str_num_of_page}</div>
+</div>
+<!--]] page -->
+<script type="text/javascript" src="/mat/??dist/js/lib/jquery/jquery.min.js,dist/js/language/admin_zh_cn.js,dist/js/modules/common.js,dist/js/admin/admin_commission.js?code_version={$_SGLOBAL['code_version']}"></script>
+<script type="text/javascript">
+var str_formhash = '{$_SGLOBAL['formhash']}';
+admin_commission._init();
+</script>
+<!--{template template/admin/footer}-->

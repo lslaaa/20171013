@@ -1,0 +1,105 @@
+<!--{template template/shop/header}-->
+<!-- 列表 [[-->
+<div class="help_menu mt10">
+	<div class="f_l">
+    	省:
+        <select id="J_province" name="province" data-cid="$province_id" style="height:36px; line-height:36px;">
+            <option value="0">{$arr_language['select']}</option>
+        {loop $arr_province_list $v}
+            <option value="{$v['id']}" {if $province_id==$v['id']}selected{/if}>{$v['name']}</option>
+        {/loop}
+        </select>
+        市:
+        <select id="J_city" name="city" data-cid="{$city_id}" style="height:36px; line-height:36px;">
+            <option value="0">{$arr_language['select']}</option>
+        {loop $arr_city_list $v}
+            <option value="{$v['id']}" {if $city_id==$v['id']}selected{/if}>{$v['name']}</option>
+        {/loop}
+        </select>
+        地区:
+        <select id="J_area" name="area" data-cid="{$area_id}" style="height:36px; line-height:36px;">
+            <option value="0">{$arr_language['select']}</option>
+        {loop $arr_area_list $v}
+            <option value="{$v['id']}" {if $area_id==$v['id']}selected{/if}>{$v['name']}</option>
+        {/loop}
+        </select>
+    </div>
+    <div class="product_search">
+    <form id="search_form" method="get" action="/shop.php?mod=shop&mod_dir=shop">
+        <input type="hidden" name="mod" value="shop">
+        <input type="hidden" name="mod_dir" value="shop">
+        <input type="hidden" name="extra" value="shop_district">
+        <dl class="f_l" style="width:auto;">
+            <dt class="ml15">商圈名:</dt>
+            <dd><input value="{$str_name}" name="name" class="text"></dd>
+            <dt class="ml15 add_navbox"><input type="submit" style="margin-top:0;" value="搜索" class="blue_nav"></dt>
+        </dl>
+        
+    </form>
+</div>
+</div>
+<div class="admin_menu mt12">
+        <span class="J_show_hide_menu">
+            <a id="J_add_level_one" href="javascript:;" class="blue_nav">{$arr_language['add']}</a>
+        </span>
+        <span class="J_submit_from"></span>
+</div>
+<div class="info_wrap main_table mt10">
+    <table>
+    	<tr>
+            <th class="table_w5" style="text-align:left; padding-left:10px;">商圈名</th>
+            <th class="table_w5">所属省市地区</th>
+            <th class="table_w5">{$arr_language['admin_member']['do']}</th>
+        </tr>
+        {if $arr_list['total']>0}
+        {loop $arr_list['list'] $v}
+        <tr class="white">
+            <td style="text-align:left; padding-left:10px;">{$v['name']}</td>
+            <td>
+            	{$v['province_name']}&nbsp;&nbsp;{$v['city_name']}&nbsp;&nbsp;{$v['area_name']}
+            </td>
+            <td class="table_nav">
+            	{if $arr_languages}
+            	<a style="width:50px;" href="/shop.php?mod=news&mod_dir=news&extra=add&nid={$v['nid']}&copy=1" class="red_nav admin_nav">{$arr_language['copy']}</a>
+                {/if}
+            <!-- 	<a{if $arr_languages} style="width:50px;" {/if} href="/shop.php?mod=news&mod_dir=news&extra=add&nid={$v['nid']}" class="blue_nav admin_nav">{$arr_language['mod']}</a> -->
+                <a{if $arr_languages} style="width:50px;" {/if} href="javascript:;" class="gray_nav admin_nav J_btn_del" onclick="return false;" data-id="{$v['id']}">{$arr_language['del']}</a>
+			</td>
+        </tr>
+        {/loop}
+        {else}
+        <tr class="white">
+            <td colspan="3"><div class="no-data">{$arr_language['nothing']}</div></td>
+        </tr>
+        {/if}
+    </table>
+</div>
+<!--]] 列表 -->
+<!-- page [[-->
+
+<div class="info_wrap mt20">
+	<div class="page">{$str_num_of_page}</div>
+</div>
+<!--]] page -->
+<script type="text/javascript" src="/mat/??dist/js/lib/jquery/jquery.min.js,dist/js/language/admin_zh_cn.js,dist/js/modules/common.js,dist/js/shop/admin_shop.js?code_version={$_SGLOBAL['code_version']}"></script>
+<script type="text/javascript">
+var str_formhash = '{$_SGLOBAL['formhash']}'
+admin_district._init()
+admin_district.province = '{$json_province}'
+$('#J_province').change(function(){
+    var province = $('#J_province').val();
+    window.location.href='/shop.php?mod=shop&mod_dir=shop&extra=shop_district&province='+province
+})
+$('#J_city').change(function(){
+    var province = $('#J_province').val();
+    var city = $('#J_city').val();
+    window.location.href='/shop.php?mod=shop&mod_dir=shop&extra=shop_district&province='+province+'&city='+city
+})
+$('#J_area').change(function(){
+    var province = $('#J_province').val();
+    var city = $('#J_city').val();
+    var area = $('#J_area').val();
+    window.location.href='/shop.php?mod=shop&mod_dir=shop&extra=shop_district&province='+province+'&city='+city+'&area='+area
+})
+</script>
+<!--{template template/index/footer}-->

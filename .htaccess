@@ -1,0 +1,42 @@
+RewriteEngine on
+RewriteCond %{HTTP_HOST} !^localhost$ [NC]
+RewriteRule ^(.*)$ http://localhost/$1 [L,R=301]
+RewriteCond %{QUERY_STRING} ^\?
+RewriteRule .* concat.php? [L]
+RewriteRule ^\/(.*)\/dist\/(.*) /$1/src/$2 [L]
+
+RewriteCond %{QUERY_STRING} ^mod=
+RewriteRule ^/(admin|index)/.* /$1.php?%{QUERY_STRING} [L]
+RewriteRule ^/\//.* /index.php?%{QUERY_STRING} [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !\.(gif|jpeg|png|jpg|bmp|js|css|mp4)$
+RewriteRule ^([a-z1-9-_]+)(/|)$ /index.php?mod-$1??%{QUERY_STRING} [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !\.(gif|jpeg|png|jpg|bmp|js|css|mp4)$
+RewriteRule ^([^\/]+)\/([^\/]+)(/|)$ /index.php?mod-$1-$2??%{QUERY_STRING} [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !\.(gif|jpeg|png|jpg|bmp|js|css|mp4)$
+RewriteRule ^([^\/]+)\/([^\/]+)\/([^\/]+)(/|)$ /index.php?mod-$1-extra-$2-$3??%{QUERY_STRING} [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !\.(gif|jpeg|png|jpg|bmp|js|css|mp4)$
+RewriteRule ^(/|)$ /index.php?mod-index [L]
+
+
+#RewriteRule ^(.*)$ http://hk.dbreach.com/$1 [L,R=301]
+#¡¡¡¡RewriteCond  RewriteRule
+#if ($query_string ~* "^\?"){
+#	rewrite .* /concat.php break;
+#    }
+
+    #if ($uri ~* "^\/.*\/dist\/"){
+#	rewrite ^\/(.*)\/dist\/(.*) /$1/src/$2 break;
+#    }
+
+#if ($query_string ~* "^mod="){
+#	rewrite ^/(admin|index)/.* /$1.php?$query_string? break;
+#    }

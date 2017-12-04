@@ -1,0 +1,165 @@
+Date:2017-11-27 23:03:51
+REFERER:
+URL:localhost/20171013/
+IP:::1
+HTTP_USER_AGENT:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+Message:Can not connect to MySQL server
+SQL:127.0.0.1
+MYSQL Error:Connection refused
+MYSQL ErrorNo:2002
+
+
+Date:2017-11-27 23:09:03
+REFERER:
+URL:localhost/20171013/
+IP:::1
+HTTP_USER_AGENT:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+Message:Can not connect to MySQL server
+SQL:127.0.0.1
+MYSQL Error:Access denied for user 'root'@'localhost' (using password: NO)
+MYSQL ErrorNo:1045
+
+
+Date:2017-11-28 00:40:15
+REFERER:
+URL:localhost/
+IP:::1
+HTTP_USER_AGENT:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+Message:Can not connect to MySQL server
+SQL:127.0.0.1
+MYSQL Error:Connection refused
+MYSQL ErrorNo:2002
+
+
+Date:2017-11-28 00:41:11
+REFERER:
+URL:localhost/
+IP:::1
+HTTP_USER_AGENT:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+Message:MySQL Query Error
+SQL:SELECT * FROM  `index_member` WHERE `uid`='17'
+MYSQL Error:No database selected
+MYSQL ErrorNo:1046
+
+
+Date:2017-11-28 00:41:13
+REFERER:
+URL:localhost/
+IP:::1
+HTTP_USER_AGENT:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+Message:MySQL Query Error
+SQL:SELECT * FROM  `index_member` WHERE `uid`='17'
+MYSQL Error:No database selected
+MYSQL ErrorNo:1046
+
+
+Date:2017-11-28 00:41:13
+REFERER:
+URL:localhost/
+IP:::1
+HTTP_USER_AGENT:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+Message:MySQL Query Error
+SQL:SELECT * FROM  `index_member` WHERE `uid`='17'
+MYSQL Error:No database selected
+MYSQL ErrorNo:1046
+
+
+Date:2017-11-28 00:41:13
+REFERER:
+URL:localhost/
+IP:::1
+HTTP_USER_AGENT:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+Message:MySQL Query Error
+SQL:SELECT * FROM  `index_member` WHERE `uid`='17'
+MYSQL Error:No database selected
+MYSQL ErrorNo:1046
+
+
+Date:2017-11-28 00:41:13
+REFERER:
+URL:localhost/
+IP:::1
+HTTP_USER_AGENT:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+Message:MySQL Query Error
+SQL:SELECT * FROM  `index_member` WHERE `uid`='17'
+MYSQL Error:No database selected
+MYSQL ErrorNo:1046
+
+
+Date:2017-11-29 00:09:26
+REFERER:http://localhost/shop.php?mod=item&extra=add&temp_id=22
+URL:localhost/shop.php?mod=item&extra=add
+IP:::1
+HTTP_USER_AGENT:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+Message:Can not connect to MySQL server
+SQL:10.24.25.54
+MYSQL Error:
+MYSQL ErrorNo:
+
+
+Date:2017-11-29 00:09:26
+REFERER:http://localhost/shop.php?mod=item&extra=add&temp_id=22
+URL:localhost/shop.php?mod=item&extra=add
+IP:::1
+HTTP_USER_AGENT:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+Message:MySQL Query Error
+SQL:UPDATE  `index_user` SET `balance`=`balance`-66 WHERE `uid`=23
+MYSQL Error:Operation timed out
+MYSQL ErrorNo:2002
+
+
+Date:2017-11-29 00:10:26
+REFERER:http://localhost/shop.php?mod=item&extra=add&temp_id=22
+URL:localhost/shop.php?mod=item&extra=add
+IP:::1
+HTTP_USER_AGENT:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+Message:Can not connect to MySQL server
+SQL:10.24.25.54
+MYSQL Error:Operation timed out
+MYSQL ErrorNo:2002
+
+
+Date:2017-11-29 00:10:26
+REFERER:http://localhost/shop.php?mod=item&extra=add&temp_id=22
+URL:localhost/shop.php?mod=item&extra=add
+IP:::1
+HTTP_USER_AGENT:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+Message:MySQL Query Error
+SQL:UPDATE  `index_item` SET `is_pay`='1',`status`='200' WHERE `item_id`='29'
+MYSQL Error:Operation timed out
+MYSQL ErrorNo:2002
+
+
+Date:2017-11-29 00:11:26
+REFERER:http://localhost/shop.php?mod=item&extra=add&temp_id=22
+URL:localhost/shop.php?mod=item&extra=add
+IP:::1
+HTTP_USER_AGENT:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+Message:Can not connect to MySQL server
+SQL:10.24.25.54
+MYSQL Error:Operation timed out
+MYSQL ErrorNo:2002
+
+
+Date:2017-11-29 00:11:26
+REFERER:http://localhost/shop.php?mod=item&extra=add&temp_id=22
+URL:localhost/shop.php?mod=item&extra=add
+IP:::1
+HTTP_USER_AGENT:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+Message:MySQL Query Error
+SQL:INSERT INTO  `index_money_log`(`type`,`uid`,`sid`,`item_id`,`money`,`content`,`in_date`) VALUE ('10','23','2','29','66','发布任务','1511885306')
+MYSQL Error:Operation timed out
+MYSQL ErrorNo:2002
+
+
+Date:2017-12-02 00:07:59
+REFERER:
+URL:localhost/
+IP:::1
+HTTP_USER_AGENT:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36
+Message:Can not connect to MySQL server
+SQL:127.0.0.1
+MYSQL Error:Connection refused
+MYSQL ErrorNo:2002
+
+

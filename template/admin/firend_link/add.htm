@@ -1,0 +1,50 @@
+<!--{template template/admin/header}-->
+<form id="J_send_form" action="/admin.php?mod=firend_link&mod_dir=firend_link&extra=add" method="post" target="ajaxframeid" enctype="Multipart/form-data">
+    <input type="hidden" name="formhash" value="{$_SGLOBAL['formhash']}">
+    <input type="hidden" name="fid" value="{$int_fid}">
+    <input id="J_form_do" type="hidden" name="form_do">
+    
+    <input class="J_callback" type="hidden" name="callback" value="parent.send_success">
+<div class="form_list mt10 trade">
+    <dl class="mt12">
+        <dt>{$arr_language['firend_link']['name']}:</dt>
+        <dd>
+        	<input id="J_name" type="text" name="name" class="text_s" autocomplete="off" value="{$arr_firend_link['name']}" style="width:400px;"><span class="tips red">*</span>
+        </dd>
+    </dl>
+    <dl class="mt12">
+        <dt>{$arr_language['firend_link']['url']}:</dt>
+        <dd>
+        	<input id="J_url" type="text" name="url" class="text_s" autocomplete="off" value="{$arr_firend_link['url']}" style="width:400px;"><span class="tips red">*</span>
+        </dd>
+    </dl>
+    <dl class="mt12" id="J_pic_box">
+            <dt>{$arr_language['pic']}:</dt>
+            <dd style="position:relative;" id="J_img_add_dd">
+                <input type="hidden" name="pic_url" value="{$arr_firend_link['pic']}" id="J_pic_url" style="float:left;"/>
+                <input name="pic" id="J_pic" type="file" style="filter:alpha(opacity=0);-moz-opacity:0;opacity:0;width:100px;height:36px;position:absolute;left:0;top:0;cursor: pointer;float:left;">
+                <a class="upload_pic f_l" href="javascript:;">{$arr_language['upload']}</a>
+                <span class="size f_l ml10 gray">{$arr_language['best']}:<em id="J_best_size">{$str_pic_size}</em></span>
+                <div class="up_pic_box">
+                    <span id="J_pic_show">{if $arr_firend_link['pic']}<img src="{$arr_firend_link['pic']}" style="width:100px;" />{/if}</span>
+                </div>
+            </dd>
+        </dl>
+    
+    <dl class="mt12">
+        <dt>{$arr_language['sort']}:</dt>
+        <dd>
+        	<input type="text" name="sort" class="text_s" autocomplete="off" value="{if $arr_firend_link['sort']}{$arr_firend_link['sort']}{else}200{/if}">
+        </dd>
+    </dl>
+    <dl class="mt20">
+        <dt>&nbsp;</dt>
+        <dd class="sure_nav"><input type="submit" class="blue_nav" value="{$arr_language['send']}" style="border-radius:3px;height:52px; line-height:52px; width:158px; border:0; font-weight:700; font-size:16px;"></dd>
+    </dl>
+</div>
+</form>
+<script type="text/javascript" src="/mat/??dist/js/lib/jquery/jquery.min.js,dist/js/language/admin_zh_cn.js,dist/js/modules/common.js,dist/js/admin/admin_firend_link.js?code_version={$_SGLOBAL['code_version']}"></script>
+<script type="text/javascript">
+admin_firend_link._init();
+</script>
+<!--{template template/admin/footer}-->

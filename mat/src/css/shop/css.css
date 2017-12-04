@@ -1,0 +1,82 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* global */
+body{font-family:Tahoma,Arial,\5fae\8f6f\96c5\9ed1,\5b8b\4f53;color:#4a4a4a;background-color:#fff;font-size:14px;}
+body,div,ul,li,dl,dt,dd,table,th,tr,td,img,p,font,span,h1,h2,h3,iframe{margin:0px;padding:0px;border:0;list-style:none;}
+a{color:#333;text-decoration:none;}
+a:active,a:hover{color:#f60;text-decoration:none;}
+.clear{clear:both;font-size:1px;visibility:hidden;margin-top:0px!important;*margin-top:-1px;line-height:0}
+.f_l{float:left;}
+.f_r{float:right;}
+a,img{blr:expression(this.onFocus=this.blur());outline:none;}
+em,i{font-style:normal;}
+input,textarea,select{font-family:\5fae\8f6f\96c5\9ed1;}
+
+/* margin */
+.ml10{margin-left:10px;}
+.ml15{margin-left:15px;}
+.ml20{margin-left:20px;}
+.mt10{margin-top:10px;}
+.mt15{margin-top:15px;}
+.mt20{margin-top:20px;}
+.mt30{margin-top:30px;}
+
+/* ico */
+.ico{background-image:url(/mat/dist/images/shop/ico.png);background-repeat:no-repeat;}
+
+/* wp */
+.wp{width:1200px;margin:auto;overflow:hidden;}
+
+/* head */
+.head{width:100%;overflow:hidden;padding:20px 0 30px;background-color:#ff4200;}
+.head .logo{float:left;overflow:hidden;}
+.head .logo img{display:block;width:100%;}
+.head .menu{float:right;height:20px;margin-top:12px;overflow:hidden;}
+.head .menu a{display:inline-block;vertical-align:top;margin-left:25px;}
+.head .menu a i{display:inline-block;vertical-align:top;width:16px;height:16px;overflow:hidden;margin:2px 3px 0 0;}
+.head .menu a i.ico_a{background-position:left top;}
+.head .menu a i.ico_b{background-position:-16px top;}
+.head .menu a i.ico_c{background-position:-32px top;}
+.head .menu a em{display:inline-block;vertical-align:top;line-height:20px;color:#fff;font-size:16px;}
+.head .video{width:100%;overflow:hidden;min-height:540px;background-color:#fff;margin-top:15px;}
+
+/* title */
+.title{width:100%;height:54px;overflow:hidden;padding:40px 0;}
+.title span{display:block;margin:auto;width:513px;height:54px;overflow:hidden;background-image:url(/mat/dist/images/shop/title_font.jpg);background-repeat:no-repeat;}
+.title span.po_a{background-position:left top;}
+.title span.po_b{background-position:left -54px;}
+.title span.po_c{background-position:left -108px;}
+
+/* reg_box */
+.reg_box{width:60%;margin:auto;overflow:hidden;padding:50px 0 80px;}
+.reg_box h1{width:100%;font-weight:100;color:#fff;text-align:center;font-size:24px;line-height:30px;height:60px;overflow:hidden;}
+.reg_box dl{width:100%;overflow:hidden;margin-top:20px;}
+.reg_box dl dt{width:25%;color:#fff;line-height:44px;float:left;text-align:right;}
+.reg_box dl dd{width:73%;float:right;overflow:hidden;}
+.reg_box dl dd span.inp{display:block;height:42px;border:#fff 1px solid;background-color:#ff6b37;border-radius:5px;}
+.reg_box dl dd span.inp input{display:block;width:100%;border:0;padding:0;background:none;color:#fff;height:42px;font-size:16px;text-indent:10px;}
+.reg_box dl dd input.nav{width:30%;background-color:#fff;border:0;height:44px;font-size:16px;cursor:pointer;}
+
+/* content */
+.content{display:block;border:#ddd 1px solid;overflow:hidden;padding:30px;border-radius:20px;}
+.content .info{width:100%;overflow:hidden;font-size:14px;line-height:28px;}
+.content .info img{display:block;float:left;margin-right:20px;}
+
+.content .list{width:100%;overflow:hidden;font-size:14px;}
+.content .list span{display:block;float:left;}
+.content .list span p{display:block;width:100%;overflow:hidden;margin-top:20px;}
+.content .list span p i{display:inline-block;vertical-align:top;width:80px;height:80px;color:#fff;text-align:center;line-height:80px;border-radius:50%;font-size:48px;}
+.content .list span p i.co_a{background-color:#c637ff;}
+.content .list span p i.co_b{background-color:#f7e124;}
+.content .list span p i.co_c{background-color:#37c4ff;}
+.content .list span p em{display:inline-block;vertical-align:top;font-size:18px;line-height:30px;margin:10px 0 0 10px;}
+.content .list img{display:block;float:right;margin-left:20px;}
+
+.content ul{width:1167px;}
+.content ul li{width:360px;margin-right:29px;overflow:hidden;float:left;}
+.content ul li img{display:block;width:100%;}
+.content ul li span{display:block;font-size:14px;line-height:24px;margin-top:15px;}
+
+/* copyright */
+.copyright{width:100%;text-align:center;padding:30px 0;overflow:hidden;}

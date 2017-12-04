@@ -1,0 +1,13 @@
+</div>
+<!--{eval
+$arr_languages = get_languages();
+$arr_languages = json_encode($arr_languages);
+}-->
+<script type="text/javascript">
+var json_languages = {$arr_languages};
+if(typeof(parent._attachEvent)=='function'){
+	parent._attachEvent(document.documentElement, 'keydown', parent.resetEscAndF5);
+}
+</script>
+</body>
+</html>

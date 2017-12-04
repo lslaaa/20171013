@@ -1,0 +1,49 @@
+<!--{template template/admin/header}-->
+<!-- 后台菜单设置 [[-->
+<div class="admin_rights mt10">
+    <div style="padding-top:15px">
+    <p style="font-size:18px"><b>商户账号</b></p>
+    </div>
+    <br>
+    <div class="info_wrap main_table mt10">
+    <table>
+        <tbody>
+            <tr style="white-space:nowrap; ">
+                <th class="table_w5">用户名</th>
+                <th class="table_w5">联系人</th>
+                <th class="table_w5">联系方式</th>
+                <th class="table_w5">联系qq</th>
+                <th class="table_w5">余额</th>
+                <th class="table_w4">操作</th>
+            </tr>
+    <!--]] admin_menu -->
+    <!--{if count($arr_user)>0}-->
+    <!--{loop $arr_user $arr_data}-->
+            <tr class="white"  style="white-space:nowrap; ">
+                <td>{$arr_data['username']}</td>
+                <td>{$arr_data['contacts']}</td>
+                <td>{$arr_data['mobile']}</td>
+                <td>{$arr_data['qq']}</td>
+                <td>{$arr_data['balance']}</td>
+                <td class="table_nav">
+                   <a href="javascript:;" class="J_btn_reply blue_nav admin_nav" data-id="{$arr_data['uid']}">充值</a>
+                   <a href="/admin.php?mod=money&mod_dir=money&extra=recharge_list&uid={$arr_data['uid']}" class="red_nav admin_nav" >充值记录</a>
+
+                </td>
+            </tr>
+    <!--{/loop}-->
+    <!--{/if}-->
+        </tbody></table>
+</div>
+    
+
+</div>
+<script type="text/javascript" src="/mat/dist/js/lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/mat/dist/js/language/admin_zh_cn.js"></script>
+<script type="text/javascript" src="/mat/dist/js/modules/common.js"></script>
+<script type="text/javascript" src="/mat/dist/js/admin/admin_recharge.js?code_version={$_SGLOBAL['code_version']}"></script>
+<script type="text/javascript">
+var str_formhash = '{$_SGLOBAL['formhash']}';
+admin_recharge._init();
+</script>
+<!--{template template/admin/footer}-->

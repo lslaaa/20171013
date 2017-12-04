@@ -1,0 +1,150 @@
+<!--{template template/admin/header}-->
+<!-- 列表 [[-->
+
+<div class="product_search">
+    <form id="search_form" method="get" action="/admin.php?mod=money_log&mod_dir=money">
+        <input type="hidden" name="mod" value="money_log">
+        <input type="hidden" name="mod_dir" value="money">
+<!--         <dl class="mt10 f_l" style="width:auto;">
+            <dt class="ml15">{$arr_language['member']['email']}:</dt>
+            <dd><input value="{$str_email}" name="email" class="text"></dd>
+        </dl> -->
+        
+        <!-- <dl class="mt10 f_l" style="width:auto;">
+            <dt class="ml15">类型:</dt>
+            <dd><select style="height:36px; line-height:36px;width: 100px">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+            </select></dd>
+        </dl> -->
+        <dl class="mt10 f_l" style="width:auto;">
+            <dt class="ml15">时间:</dt>
+            <dd><input value="{$str_username}" name="start_time" class="text" id="start_time"></dd>
+            <dd><span style="height:36px; line-height:36px;margin:0px 10px">至</span></dd>
+            <dd><input value="{$str_username}" name="end_time" class="text" id="end_time"></dd>
+        </dl>
+        <dl class="mt10 f_l" style="width:auto;">
+            <dt class="ml15">店铺:</dt>
+            <dd><input value="{$str_shop}" name="shop" class="text"></dd>
+        </dl>
+        <dl class="mt10 f_l" style="width:auto;">
+            <dt class="ml15">订单号:</dt>
+            <dd><input value="{$str_tid}" name="tid" class="text"></dd>
+        </dl>
+        <dl class="mt10 f_l" style="width:auto;">
+            <dt class="ml15 add_navbox"><input type="submit" style="margin-top:0;" value="搜索" class="blue_nav"></dt>
+            <dt class="ml15"><input class="blue_nav" type="button" id="J_export" onclick="export_log()" value="导出"/></dt>
+        </dl>
+        
+    </form>
+</div>
+<div style="clear: both;"></div>
+<div class="admin_rights mt10">
+    <div class="product_search">
+        <input type="hidden" value="{$arr_member['uid']}" name="shopid" id="uid" />
+        <input type="hidden" value="{$arr_member['balance']}" name="balance" id="balance" />
+        <dl style="border:none">
+            <dt style="width:auto;background-color:#fff;font-size:20px;border-bottom: none">用户名:<span style="color:red;font-size:20px">{$arr_member['username']}</span></dt>
+        </dl>
+        <dl style="border:none">
+            <dt style="width:auto;background-color:#fff;font-size:20px;border-bottom: none">账户余额:<span><font style="color:red;font-size:20px">{$arr_member['balance']}</font></span>元</dt>
+            <!--<dt style="width:auto;background-color:#fff;font-size:20px;margin-left:30px">冻结余额:<span><font style="color:red;font-size:20px">{$arr_member['freeze_balance']}</font></span>元</dt>-->
+        </dl>
+    
+        <br>
+    </div>
+</div>
+<div style="clear: both;"></div>
+<div class="admin_rights mt10">
+<div class="info_wrap main_table mt10">
+    <table>
+        <tr style="white-space:nowrap">
+            <th class="table_w6">时间</th>
+            <th class="table_w5">金额</th>
+            <th class="table_w5">说明</th>
+            <th class="table_w5">店铺名</th>
+            <th class="table_w5">订单号</th>
+            <th class="table_w5">备注</th>
+            <!-- <th class="table_w5">操作</th> -->
+        </tr>
+        {if count($arr_money_log['list'])>0}
+        {loop $arr_money_log['list'] $v}
+        <tr class="white">
+            <td><p><!--{eval echo date('Y-m-d H:i:s',$v['in_date']);}--></p></td>
+            <td>{if $v['type']!=11 && $v['type']!=80 && $v['type']!=100 && $v['type']!=110}<b style="color: red">+{else}<b style="color: green">-{/if}{$v['wk_money']}</b></td>
+            <td>{$arr_type_content[$v['type']]}</td>
+            <td>{$arr_tmshop[$v['sid']]['shopid']}</td>
+            <td>{$v['tid']}</td>
+            <td>
+                <!-- {if $v['sid']}店铺：{$arr_tmshop[$v['sid']]['shopid']}<br>订单号：{$v['tid']}{/if} -->
+            </td>
+            <!-- <td class="table_nav"><a href="javascript:;" class="J_btn_reply blue_nav admin_nav" data-id="{$v['id']}">留言</a></td> -->
+        </tr>
+        {/loop}
+        {else}
+        <tr class="white">
+            <td colspan="10"><div class="no-data">没有数据</div></td>
+        </tr>
+        {/if}
+    </table>
+</div>
+        
+<!--]] 列表 -->
+<!-- page [[-->
+
+<div class="info_wrap mt20">
+
+    <div class="page">
+    {$str_num_of_page}
+    <a>本页<!--{eval echo count($arr_money_log['list'])}-->条</a>
+    <a>共<!--{eval echo $arr_money_log['total']}-->条</a>
+    </div>
+</div>
+</div>
+
+<!--]] page -->
+<script type="text/javascript" src="/mat/dist/js/lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/mat/dist/js/language/admin_zh_cn.js"></script>
+<script type="text/javascript" src="/mat/dist/js/modules/common.js"></script>
+<script type="text/javascript" src="/mat/dist/js/index/recharge.js"></script>
+<script type="text/javascript" src="/mat/dist/js/index/admin_confirm_recharge.js?code_version={$_SGLOBAL['code_version']}"></script>
+<script type="text/javascript" src="/lib/editor_lemb/jquery.datetimepicker.full.js"></script>
+<link rel="stylesheet" type="text/css" href="mat/dist/css/jquery.datetimepicker.css">
+<script type="text/javascript">
+var str_formhash = '{$_SGLOBAL['formhash']}';
+$.datetimepicker.setLocale('ch')
+$('#start_time,#end_time').datetimepicker({
+    timepicker:false,
+    format:'Y-m-d',
+    lang:"ch",
+});
+
+function export_log(){
+    var start_time = $('#start_time').val()
+    var end_time = $('#end_time').val()
+    if (!start_time || !end_time) {
+            make_alert_html('提示','请选择开始结束时间');
+            return false;
+    }
+    $.post(
+            '/admin.php?mod=money_log&mod_dir=money&extra=export',
+            {'export':1,'start_time':start_time,'end_time':end_time},
+            function(data){
+                // alert(data)
+                _data = eval("("+data+")");
+                if (_data.status==204) {
+                    make_alert_html('提示',_data.info);
+                }else{
+                    make_alert_html('提示',_data.info);
+                    window.setTimeout(function(){
+                        window.location.href='/admin.php?mod=money_log&mod_dir=money&extra=export&export=1&start_time='+start_time+'&end_time='+end_time;
+                    },5000); 
+                    
+                }
+            }
+
+        );
+}
+</script>
+<!--{template template/admin/footer}-->

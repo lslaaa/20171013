@@ -1,0 +1,52 @@
+<!--{template template/index/header}-->
+
+<body>
+<!-- 头部 -->
+<div class="header">
+	<div class="hed_lf"><a href="/i"><i class="icon iconfont icon-sanjiao"></i></a></div>
+	<div class="hed_ct">金币明细</div>
+</div>
+<!-- 头部end -->
+
+<!-- container -->
+<div class="center">
+	<div class="gold_detail">
+		<div class="mber_top">
+			<div class="mber_top_tux">
+				<p class="txt">累计金币</p>
+				<p class="money"><!--{eval echo $arr_member['balance']+$arr_member['commission']}--></p>
+			</div>
+			<p class="mingx">金币明细</p>
+			<ul>
+				<li class="h2">
+					<p>可用金币</p>
+					<p>{$arr_member['balance']}</p>
+				</li>
+				<li class="h3">
+					<p>活动奖励</p>
+					<p>0.00</p>
+				</li>
+				<div class="clearfix"></div>
+			</ul>
+		</div>
+		<dl class="gold_list">
+			<dt>近5日金币明细</dt>
+			{loop $arr_money_log['list'] $v}
+			<dd><!--{eval echo date('Y-m-d',$v['in_date'])}-->
+				<span>{if $v['type']!=50}+{else}-{/if}{$v['money']}</span>
+			</dd>
+			{/loop}
+		</dl>
+	</div>
+</div>
+<!-- /container -->
+
+
+<!-- footer -->
+<!-- footer end -->
+
+
+
+</body>
+
+</html>

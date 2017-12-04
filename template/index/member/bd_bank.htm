@@ -1,0 +1,110 @@
+<!--{template template/index/header}-->
+
+<body>
+<!-- 头部 -->
+<div class="header">
+	<div class="hed_lf"><a href="/i"><i class="icon iconfont icon-sanjiao"></i></a></div>
+	<div class="hed_ct">绑定银行卡</div>
+</div>
+<!-- 头部end -->
+
+<!-- container -->
+<div class="container">
+	<form id="J_send_form" action="/i/bd_bank" method="post" target="ajaxframeid">
+    	<input class="J_callback" type="hidden" name="callback" value="parent.send_success">
+    	<input type="hidden" name="formhash" value="{$_SGLOBAL['formhash']}">
+	<div class="bd_alipay">
+		<p class="h5">请绑定您的银行卡信息，用于提现使用</p>
+		<ul>
+			<li><span>开户行：</span><input name="bank" id="J_bank" value="{$arr_member['bank']}" placeholder="请输入开户行" onkeyup="bank_list('J_bank',this.value)" style="width: 70%;" /><i id="J_show_list" class="icon iconfont icon-sanjiao-copy-copy"></i>
+				<div class="bank_box" style="display: none">
+				<ul>
+					<li>中国工商银行</li>
+				</ul>
+				</div>
+			</li>
+			<li><span>银行卡账号：</span><input name="bank_card" id="J_bank_card" value="{$arr_member['bank_card']}" placeholder="请输入姓名" style="width: 65%;" /></li>
+			<li><span>银行卡姓名：</span><input name="bank_card_name" id="J_bank_card_name" value="{$arr_member['bank_card_name']}" placeholder="请输入账号" style="width: 65%;" /></li>
+		</ul>
+		<div class="and_login"><a href="javascript:;" id="J_send">绑定</a></div>	
+	</div>
+	</form>
+</div>
+<!-- /container -->
+
+
+<!-- footer -->
+<!-- footer end -->
+<script src="/mat/dist/js/lib/jquery/jquery.min.js" type="text/javascript"></script>
+<script src="/mat/dist/js/modules/common.js" type="text/javascript"></script>
+<script src="/mat/dist/js/language/zh_cn.js" type="text/javascript"></script>
+<script src="/mat/dist/js/index/idangerous.swiper.min.js"></script> 
+<script src="/mat/dist/js/index/member_account.js"></script> 
+<script type="text/javascript">
+bd_bank._init()
+$(function(){
+    $('#J_bank').click(function(){
+        if ($(this).val()) {
+            bank_list('J_bank',$(this).val())
+        }else{
+            bank_list('J_bank','all')
+        }
+    })
+})
+function bank_list(obj,val){
+	var reg = new RegExp("[\\u4E00-\\u9FFF]+","g");
+　　	if(reg.test(val) || val=='all'){     
+		$.post(
+			'/i/bank_list',
+			{'name':val},
+			function(data){
+				console.log(data)
+				var _data = eval("("+data+")")
+				$('.bank_box li').remove()
+				if (val!='all') {
+					$('.bank_box ul').append('<li>'+val+'</li>')
+				}
+				for (var i = 0; i < _data.length; i++) {
+					$('.bank_box ul').append('<li>'+_data[i].name+'</li>')
+				}
+				$('.bank_box').show() 
+
+				$('.bank_box li').click(function(){
+					var name = $(this).text()
+					$('#J_bank').val(name)
+					$('.bank_box').hide() 
+				})
+			}
+
+		)
+　　	}
+	if (!val) {
+		$('.bank_box').hide() 
+	}
+}
+$('#J_show_list').click(function(){
+    	$.post(
+		'/i/bank_list',
+		{'name':'all'},
+		function(data){
+			console.log(data)
+			var _data = eval("("+data+")")
+			$('.bank_box li').remove()
+
+			for (var i = 0; i < _data.length; i++) {
+				$('.bank_box ul').append('<li>'+_data[i].name+'</li>')
+			}
+			$('.bank_box').show() 
+
+			$('.bank_box li').click(function(){
+				var name = $(this).text()
+				$('#J_bank').val(name)
+				$('.bank_box').hide() 
+			})
+		}
+
+	)
+})
+</script>
+
+<!--{template template/index/footer}-->

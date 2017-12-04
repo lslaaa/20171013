@@ -1,0 +1,55 @@
+<!--{template template/index/header}-->
+
+<body>
+<!-- 头部 -->
+<div class="header">
+	<div class="hed_lf"><a href="/i"><i class="icon iconfont icon-sanjiao"></i></a></div>
+	<div class="hed_ct">我的客户</div>
+</div>
+<!-- 头部end -->
+
+<!-- container -->
+<div class="center">
+	<div class="my_client">
+		<p class="h3">我的客户（{$arr_list['total']}）</p>
+		<ul>
+			{loop $arr_list['list'] $v}
+			<li>
+				<img class="img" src="{$v['face']}" alt="头像">
+				<dl>
+					<dt>{if $v['nickname']}{$v['nickname']}{else}{$v['username']}{/if}<span><!--{eval echo date('Y-m-d',$v['in_date'])}--></span></dt>
+					<dd>{$v['phone']}<span>已做任务<label>0</label></span></dd>
+				</dl>
+				<div class="clearfix"></div>
+			</li>
+			{/loop}
+			<!-- <li>
+				<img class="img" src="../images/banner_03.jpg" alt="">
+				<dl>
+					<dt>我爱洗澡<span>2017-01-01</span></dt>
+					<dd>13800138000<span>已做任务<label>0</label></span></dd>
+				</dl>
+				<div class="clearfix"></div>
+			</li>
+			<li>
+				<img class="img" src="../images/banner_03.jpg" alt="">
+				<dl>
+					<dt>我爱洗澡<span>2017-01-01</span></dt>
+					<dd>13800138000<span>已做任务<label>0</label></span></dd>
+				</dl>
+				<div class="clearfix"></div>
+			</li> -->
+		</ul>
+	</div>
+</div>
+<!-- /container -->
+
+
+<!-- footer -->
+<!-- footer end -->
+
+
+
+</body>
+
+</html>
